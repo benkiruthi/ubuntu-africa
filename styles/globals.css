@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+/* Wire next/font CSS variables to the family names ubuntu-theme.css uses directly */
+:root {
+  font-family: var(--font-inter, Inter, -apple-system, BlinkMacSystemFont, sans-serif);
+}

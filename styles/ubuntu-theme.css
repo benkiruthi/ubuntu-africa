@@ -1,0 +1,304 @@
+/**
+ * styles/ubuntu-theme.css
+ *
+ * Shared component styles for every Ubuntu Africa product landing page,
+ * matching the three-layer structure (AI Coach / Transformation Engine /
+ * Community) used across Learn, Jobs, Business, Health, Money, Farmer,
+ * and the homepage.
+ *
+ * THEMING: wrap each page's root element in
+ *   data-ubuntu-theme="<slug>"   (slug matches lib/theme.js keys)
+ * which sets --primary / --primary-deep. Every other token (cream, ink,
+ * gold, terracotta, indigo) is shared across the whole ecosystem.
+ *
+ * USAGE:
+ *   import "@/styles/ubuntu-theme.css";
+ *   import { getTheme } from "@/lib/theme";
+ *
+ *   const theme = getTheme("learn");
+ *   <main className="ux-page" data-ubuntu-theme={theme.slug}>...</main>
+ *
+ * Pages should no longer carry their own <style> blocks for these
+ * patterns — this file is the only place this CSS lives.
+ */
+
+/* ---------- BASE TOKENS (shared across every product) ---------- */
+:root {
+  --cream: #faf7f0;
+  --ink: #20231f;
+  --ink-soft: #5c5e58;
+  --gold: #d6a24a;
+  --terracotta: #c1502e;
+  --indigo: #2c5f77;
+  --card-bg: #ffffff;
+  --line: rgba(32, 35, 31, 0.1);
+}
+
+/* ---------- PER-PRODUCT PRIMARY COLOR ---------- */
+[data-ubuntu-theme="connect"]  { --primary: #1b4332; --primary-deep: #122b20; }
+[data-ubuntu-theme="learn"]    { --primary: #24476b; --primary-deep: #16304d; }
+[data-ubuntu-theme="jobs"]     { --primary: #92400e; --primary-deep: #6b2f0a; }
+[data-ubuntu-theme="business"] { --primary: #6b2545; --primary-deep: #4a1830; }
+[data-ubuntu-theme="health"]   { --primary: #0e7c7b; --primary-deep: #095452; }
+[data-ubuntu-theme="money"]    { --primary: #8a6d1f; --primary-deep: #5c4914; }
+[data-ubuntu-theme="farmer"]   { --primary: #5b6b2f; --primary-deep: #3d481f; }
+[data-ubuntu-theme="home"]     { --primary: #20231f; --primary-deep: #0f110e; }
+
+/* ---------- GLOBAL ---------- */
+.ux-page, .ux-page * { box-sizing: border-box; }
+.ux-page {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.ux-page h1, .ux-page h2, .ux-page h3 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.ux-page em {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.tone-primary { --tone: var(--primary); }
+.tone-gold { --tone: var(--gold); }
+.tone-terracotta { --tone: var(--terracotta); }
+.tone-indigo { --tone: var(--indigo); }
+
+.ux-section-eyebrow {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+.ux-layer-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, white);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.7rem;
+}
+.ux-layer-tag.light { color: var(--gold); background: rgba(255,255,255,0.12); }
+
+/* ---------- NAV ---------- */
+.ux-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem; max-width: 1120px; margin: 0 auto;
+}
+.ux-logo { font-weight: 800; font-size: 1.15rem; color: var(--primary); }
+.ux-nav-right { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.ux-nav-link { color: var(--ink-soft); font-size: 0.9rem; font-weight: 600; text-decoration: none; }
+.ux-nav-link:hover { color: var(--primary); }
+.ux-nav-cta {
+  background: var(--primary); color: #fff; font-weight: 700; font-size: 0.88rem;
+  padding: 0.6rem 1.2rem; border-radius: 999px; text-decoration: none;
+}
+.ux-nav-cta:hover { background: var(--primary-deep); }
+
+/* ---------- HERO (1. PROBLEM) ---------- */
+.ux-hero { max-width: 700px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; text-align: center; }
+.ux-eyebrow {
+  display: inline-block; font-size: 0.88rem; font-weight: 700; color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, white);
+  padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1.4rem;
+}
+.ux-hero h1 { font-size: clamp(2rem, 5.4vw, 3rem); line-height: 1.14; margin-bottom: 1.1rem; }
+.ux-hero-dek { font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft); max-width: 520px; margin: 0 auto 2rem; }
+.ux-hero-actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.9rem; }
+.ux-btn-primary {
+  background: var(--primary); color: #fff; font-weight: 700; font-size: 0.98rem;
+  padding: 0.9rem 1.7rem; border-radius: 999px; text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.ux-btn-primary:hover { background: var(--primary-deep); transform: translateY(-1px); }
+.ux-btn-secondary {
+  background: transparent; color: var(--primary); font-weight: 700; font-size: 0.98rem;
+  padding: 0.9rem 1.7rem; border-radius: 999px; border: 1.5px solid var(--line); text-decoration: none;
+}
+.ux-btn-secondary:hover { border-color: var(--primary); }
+.ux-trust-line { font-size: 0.8rem; color: var(--ink-soft); margin: 0; }
+
+/* ---------- AI COACH (2. LAYER 1) ---------- */
+.ux-coach {
+  max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem 3rem;
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 1.5rem; align-items: stretch;
+}
+.ux-coach-card {
+  background: var(--primary); border-radius: 20px; padding: 2rem;
+  display: flex; gap: 1.1rem; align-items: flex-start; color: #fff;
+}
+.ux-coach-card strong { display: block; font-size: 1.1rem; margin-bottom: 0.6rem; }
+.ux-coach-card p { font-size: 0.92rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin: 0; }
+.ux-avatar {
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold); color: var(--primary-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.2rem;
+}
+.ux-avatar.small { width: 36px; height: 36px; font-size: 0.95rem; }
+.ux-insight-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 20px; padding: 1.8rem; }
+.ux-insight-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.1rem; }
+.ux-insight-head strong { display: block; font-size: 0.95rem; }
+.ux-insight-head span { display: block; font-size: 0.76rem; color: var(--ink-soft); }
+.ux-insight-score { font-family: "Fraunces", serif; font-size: 2.2rem; font-weight: 600; color: var(--primary); margin-bottom: 1.1rem; }
+.ux-insight-score span { font-size: 1rem; color: var(--ink-soft); font-weight: 400; }
+.ux-insight-bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+.ux-insight-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 0.3rem; }
+.ux-insight-track { height: 6px; background: color-mix(in srgb, var(--primary) 10%, white); border-radius: 999px; overflow: hidden; }
+.ux-insight-fill { height: 100%; background: var(--gold); border-radius: 999px; }
+
+/* ---------- TRANSFORMATION ENGINE (3. LAYER 2 — defining feature) ---------- */
+.ux-engine { background: var(--primary); color: #fff; padding: 4.5rem 1.5rem; text-align: center; }
+.ux-engine h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.8rem; }
+.ux-engine-tagline { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2rem; line-height: 1.5; }
+.ux-engine-outputs { list-style: none; margin: 0 auto 2rem; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; max-width: 640px; }
+.ux-engine-outputs li { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; }
+.ux-engine-note { max-width: 520px; margin: 0 auto; color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.55; }
+
+/* ---------- COMMUNITY (4. LAYER 3) ---------- */
+.ux-community { padding: 4.5rem 1.5rem; text-align: center; }
+.ux-community h2 {
+  font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 500;
+  color: var(--primary); font-size: clamp(1.8rem, 4.2vw, 2.4rem); margin-bottom: 1rem;
+}
+.ux-community p { color: var(--ink-soft); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+/* ---------- THE COMPLETE JOURNEY (5.) ---------- */
+.ux-steps { max-width: 720px; margin: 0 auto; padding: 1rem 1.5rem 3rem; text-align: center; }
+.ux-steps h2 { font-size: clamp(1.7rem, 3.8vw, 2.2rem); margin-bottom: 2.5rem; }
+.ux-steps-list { list-style: none; margin: 0; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 1.7rem; }
+.ux-step { display: flex; gap: 1.2rem; align-items: flex-start; }
+.ux-step-num {
+  font-family: "Fraunces", Georgia, serif; font-size: 1.4rem; font-weight: 500;
+  color: color-mix(in srgb, var(--primary) 25%, white); flex-shrink: 0; width: 38px;
+}
+.ux-step h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.ux-step p { font-size: 0.88rem; line-height: 1.5; color: var(--ink-soft); margin: 0; max-width: 460px; }
+
+/* ---------- DISCLAIMER (Health / Money / Farmer only) ---------- */
+.ux-disclaimer {
+  max-width: 760px; margin: 0 auto 3rem; padding: 1.2rem 1.4rem;
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  background: #fff7e6; border: 1px solid #f0d999; border-radius: 14px;
+}
+.ux-disclaimer-icon { font-size: 1.2rem; flex-shrink: 0; }
+.ux-disclaimer p { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #6b5416; }
+.ux-disclaimer strong { color: #4d3c10; }
+
+/* ---------- SUPPORTING: AREA/FEATURE CHIPS ---------- */
+.ux-areas { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem 3.5rem; text-align: center; }
+.ux-areas h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--ink-soft); font-weight: 700; }
+.ux-area-grid { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.ux-area-chip { background: var(--card-bg); border: 1px solid var(--line); border-left: 3px solid var(--tone); padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.85rem; font-weight: 600; }
+
+/* ---------- FAQ ---------- */
+.ux-faq { max-width: 680px; margin: 0 auto; padding: 1rem 1.5rem 4rem; text-align: center; }
+.ux-faq h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--ink-soft); font-weight: 700; }
+.ux-faq-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+.ux-faq-item { border-bottom: 1px solid var(--line); }
+.ux-faq-question {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: none; border: none; padding: 1.1rem 0; font-size: 0.95rem; font-weight: 700; color: var(--ink);
+  cursor: pointer; text-align: left;
+}
+.ux-faq-plus { font-size: 1.2rem; color: var(--primary); font-weight: 400; }
+.ux-faq-answer { margin: 0 0 1.1rem; color: var(--ink-soft); font-size: 0.88rem; line-height: 1.55; }
+
+/* ---------- ECOSYSTEM STRIP ---------- */
+.ux-ecosystem { max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem 3.5rem; text-align: center; }
+.ux-ecosystem h2 { font-size: 1.4rem; margin-bottom: 1.8rem; }
+.ux-ecosystem-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; text-align: left; }
+.ux-ecosystem-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+.ux-ecosystem-emoji { font-size: 1.2rem; }
+.ux-ecosystem-card strong { display: block; font-size: 0.84rem; color: var(--ink); }
+.ux-ecosystem-card span:not(.ux-ecosystem-status) { font-size: 0.72rem; color: var(--ink-soft); }
+.ux-ecosystem-status { margin-left: auto; font-size: 0.68rem; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+.ux-ecosystem-status.is-live { color: var(--primary); }
+
+/* ---------- CTA / WAITLIST + CONFETTI (6. STRONG INVITATION) ---------- */
+.ux-cta { position: relative; max-width: 540px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; text-align: center; overflow: hidden; }
+.ux-confetti-zone { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.ux-confetti-piece { position: absolute; top: -10%; animation-name: ux-confetti-fall; animation-timing-function: ease-in; animation-fill-mode: forwards; }
+@keyframes ux-confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(400px) rotate(320deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .ux-confetti-piece { display: none; } }
+.ux-cta h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin-bottom: 0.7rem; }
+.ux-cta > p { color: var(--ink-soft); margin: 0 0 2rem; }
+.ux-waitlist { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+.ux-waitlist input {
+  flex: 1 1 220px; min-width: 0; padding: 0.85rem 1.1rem; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card-bg); color: var(--ink); font-size: 0.95rem; outline: none;
+}
+.ux-waitlist input:focus-visible { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 15%, transparent); }
+.ux-waitlist button {
+  flex: 0 0 auto; padding: 0.85rem 1.6rem; border-radius: 999px; border: none;
+  background: var(--primary); color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.ux-waitlist button:hover { background: var(--primary-deep); }
+.ux-waitlist button:disabled { opacity: 0.6; cursor: default; }
+.ux-form-note { margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+
+/* ---------- HOMEPAGE-SPECIFIC (philosophy, layers explainer, ecosystem showcase, advisor family) ---------- */
+.ux-home-hero em { color: var(--gold); }
+
+.ux-home-philosophy { max-width: 700px; margin: 0 auto; padding: 1rem 1.5rem 4rem; text-align: center; }
+.ux-home-philosophy h2 { font-size: clamp(1.8rem, 4.2vw, 2.4rem); margin: 0.6rem 0 1.2rem; }
+.ux-home-philosophy p { color: var(--ink-soft); line-height: 1.65; margin: 0; }
+
+.ux-home-layers { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem 4.5rem; text-align: center; }
+.ux-home-layers h2 { font-size: clamp(1.8rem, 4.2vw, 2.4rem); margin-bottom: 2.5rem; }
+.ux-home-layer-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; text-align: left; }
+.ux-home-layer-grid li { background: var(--card-bg); border: 1px solid var(--line); border-radius: 18px; padding: 1.6rem; }
+.ux-home-layer-num { font-family: "Fraunces", Georgia, serif; font-size: 1.3rem; color: var(--gold); display: block; margin-bottom: 0.6rem; }
+.ux-home-layer-grid h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.ux-home-layer-grid p { font-size: 0.88rem; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+.ux-home-ecosystem { max-width: 1120px; margin: 0 auto; padding: 1rem 1.5rem 5rem; text-align: center; }
+.ux-home-ecosystem h2 { font-size: clamp(1.9rem, 4.4vw, 2.5rem); margin-bottom: 2.5rem; }
+.ux-home-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.ux-home-card { border-radius: 18px; border: 1px solid var(--line); border-top: 4px solid var(--card-color); background: var(--card-bg); transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.ux-home-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(32,35,31,0.09); }
+.ux-home-card a { display: flex; flex-direction: column; gap: 0.35rem; padding: 1.7rem 1.5rem; text-decoration: none; color: var(--ink); text-align: left; }
+.ux-home-card-emoji { font-size: 1.7rem; margin-bottom: 0.3rem; }
+.ux-home-card strong { font-size: 1.05rem; }
+.ux-home-card-tag { font-size: 0.85rem; color: var(--ink-soft); }
+.ux-home-card-engine { font-size: 0.78rem; color: var(--gold); font-weight: 700; margin: 0.3rem 0 0.4rem; }
+
+.ux-home-advisors { background: var(--ink); padding: 4.5rem 1.5rem; text-align: center; }
+.ux-home-advisors h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.8rem; }
+.ux-home-advisors-dek { color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto 2.5rem; font-size: 0.9rem; line-height: 1.55; }
+.ux-home-advisor-grid { list-style: none; margin: 0 auto; padding: 0; max-width: 1000px; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.ux-home-advisor-card { display: flex; align-items: center; gap: 0.8rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1rem 1.3rem; flex: 1 1 220px; max-width: 260px; text-align: left; }
+.ux-home-advisor-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 0.95rem; }
+.ux-home-advisor-avatar-more { background: rgba(255,255,255,0.15) !important; }
+.ux-home-advisor-card strong { display: block; color: #fff; font-size: 0.9rem; }
+.ux-home-advisor-card span { display: block; color: rgba(255,255,255,0.55); font-size: 0.76rem; }
+
+.ux-home-cta .ux-btn-primary { display: inline-block; margin-bottom: 0.9rem; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .ux-coach { grid-template-columns: 1fr; }
+  .ux-ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
+  .ux-home-grid, .ux-home-layer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .ux-nav { flex-direction: column; gap: 0.7rem; }
+  .ux-ecosystem-grid { grid-template-columns: 1fr; }
+  .ux-home-grid, .ux-home-layer-grid { grid-template-columns: 1fr; }
+  .ux-waitlist { flex-direction: column; }
+  .ux-waitlist button { width: 100%; }
+}

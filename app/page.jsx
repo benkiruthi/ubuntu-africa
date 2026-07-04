@@ -28,7 +28,7 @@ export default function UbuntuAfricaHomepage() {
           <a href={THEMES.connect.href} className="ux-btn-primary">Try Ubuntu Connect →</a>
           <a href="#layers" className="ux-btn-secondary">See how it works</a>
         </div>
-        <p className="ux-trust-line">One Ubuntu AI. Seven platforms. Free to start.</p>
+        <p className="ux-trust-line">One Ubuntu AI. Ten platforms. Free to start.</p>
       </section>
 
       {/* ---------- PHILOSOPHY ---------- */}
@@ -71,7 +71,7 @@ export default function UbuntuAfricaHomepage() {
       {/* ---------- ECOSYSTEM SHOWCASE ---------- */}
       <section id="ecosystem" className="ux-home-ecosystem">
         <span className="ux-section-eyebrow">The ecosystem</span>
-        <h2>Seven platforms. <em>One person, growing.</em></h2>
+        <h2>Ten platforms. <em>One person, growing.</em></h2>
         <ul className="ux-home-grid">
           {ecosystem.map((p) => {
             const engine = ENGINES[p.slug];

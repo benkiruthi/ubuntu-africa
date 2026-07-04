@@ -42,7 +42,10 @@
 [data-ubuntu-theme="health"]   { --primary: #0e7c7b; --primary-deep: #095452; }
 [data-ubuntu-theme="money"]    { --primary: #8a6d1f; --primary-deep: #5c4914; }
 [data-ubuntu-theme="farmer"]   { --primary: #5b6b2f; --primary-deep: #3d481f; }
-[data-ubuntu-theme="home"]     { --primary: #20231f; --primary-deep: #0f110e; }
+[data-ubuntu-theme="leadership"] { --primary: #1e3a5f; --primary-deep: #122540; }
+[data-ubuntu-theme="care"]       { --primary: #7b3f6e; --primary-deep: #522a49; }
+[data-ubuntu-theme="justice"]    { --primary: #5c3d11; --primary-deep: #3d280b; }
+[data-ubuntu-theme="home"]       { --primary: #20231f; --primary-deep: #0f110e; }
 
 /* ---------- GLOBAL ---------- */
 .ux-page, .ux-page * { box-sizing: border-box; }

@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @source "../app/**/*.{js,jsx,ts,tsx}";
 
+/* Custom breakpoint: xs = 400px (between default base and sm:640px) */
+@custom-variant xs (@media (width >= 400px));
+
 @layer utilities {
   .gradient-text {
     background: linear-gradient(135deg, #15803d 0%, #4ade80 100%);

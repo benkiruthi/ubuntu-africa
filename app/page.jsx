@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, CheckCircle2, Zap, Users, Globe, ChevronDown, ChevronUp,
+  ArrowRight, Zap, Users, Globe, ChevronDown, ChevronUp,
   Mic, Upload, ImageIcon, Camera, Send, Brain, Rocket, DollarSign,
   Briefcase, ShoppingBag, Code, UserCheck, BookOpen, Target, Layers,
   Heart, Sprout, Scale, Shield, TrendingUp
 } from 'lucide-react'
-import { THEMES, ENGINES, getEcosystemList } from '@/lib/theme'
+import { ENGINES, getEcosystemList } from '@/lib/theme'
 
 // ── Shared UI ──────────────────────────────────────────────────
 
@@ -58,18 +58,18 @@ function Nav() {
             <Btn href="https://connect.ubuntu-africa.com" variant="ghost" size="sm">Sign in</Btn>
             <Btn href="https://connect.ubuntu-africa.com" size="sm">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
           </div>
-          <button className="md:hidden p-2 space-y-1.5" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+          <button className="md:hidden p-2 flex flex-col gap-1.5" onClick={() => setOpen(!open)} aria-label="Toggle menu">
             <div className="w-5 h-0.5 bg-slate-700" /><div className="w-5 h-0.5 bg-slate-700" /><div className="w-5 h-0.5 bg-slate-700" />
           </button>
         </div>
         {open && (
-          <div className="md:hidden py-4 border-t border-slate-100 space-y-3">
-            {[['Products','#ecosystem'],['How it Works','#how-it-works'],['Mission','#mission']].map(([label, href]) => (
-              <a key={label} href={href} className="block text-sm font-medium text-slate-700 py-2" onClick={() => setOpen(false)}>{label}</a>
+          <div className="md:hidden py-4 border-t border-slate-100 space-y-1">
+            {[['Products','#ecosystem'],['How it Works','#how-it-works'],['Mission','#mission'],['Journey','#journey']].map(([label, href]) => (
+              <a key={label} href={href} className="block text-sm font-medium text-slate-700 px-2 py-3 rounded-lg hover:bg-slate-50" onClick={() => setOpen(false)}>{label}</a>
             ))}
-            <div className="flex gap-3 pt-2">
-              <Btn href="https://connect.ubuntu-africa.com" variant="outline" size="sm" className="flex-1 justify-center">Sign in</Btn>
-              <Btn href="https://connect.ubuntu-africa.com" size="sm" className="flex-1 justify-center">Get started</Btn>
+            <div className="flex flex-col gap-2 pt-3">
+              <Btn href="https://connect.ubuntu-africa.com" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
+              <Btn href="https://connect.ubuntu-africa.com" size="sm" className="w-full justify-center">Get started <ArrowRight className="w-4 h-4" /></Btn>
             </div>
           </div>
         )}
@@ -129,44 +129,52 @@ function HeroPrompt() {
     e.target.style.height = Math.min(e.target.scrollHeight, 180) + 'px'
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (value.trim()) alert(`Ubuntu AI is coming soon!\n\nYou asked: "${value}"`)
+  }
+
   return (
-    <form
-      className="w-full max-w-2xl mx-auto"
-      onSubmit={e => { e.preventDefault(); if (value.trim()) alert(`Ubuntu AI is coming soon!\n\nYou asked: "${value}"`) }}
-    >
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xl hover:shadow-2xl focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-100 transition-all duration-200 overflow-hidden">
+    <form className="w-full max-w-2xl mx-auto" onSubmit={handleSubmit}>
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-xl focus-within:border-green-400 focus-within:ring-4 focus-within:ring-green-100 transition-all duration-200 overflow-hidden">
         <textarea
           ref={taRef}
           value={value}
           onChange={e => { setValue(e.target.value); autoGrow(e) }}
-          onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.currentTarget.form.requestSubmit() } }}
+          onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit(e) } }}
           placeholder={displayed || 'Ask Ubuntu AI anything…'}
           rows={1}
-          className="w-full px-5 pt-4 pb-2 text-base text-slate-900 placeholder:text-slate-400 bg-transparent border-none outline-none resize-none min-h-[52px] max-h-[180px] overflow-y-auto leading-relaxed"
+          className="w-full px-4 pt-4 pb-2 text-base text-slate-900 placeholder:text-slate-400 bg-transparent border-none outline-none resize-none min-h-[56px] max-h-[160px] overflow-y-auto leading-relaxed"
           aria-label="Your question or goal"
         />
-        <div className="flex items-center justify-between px-3 pb-3 pt-1">
-          <div className="flex items-center gap-0.5">
+        {/* Action bar — icons hidden on xs screens to fit submit button */}
+        <div className="flex items-center justify-between px-2 pb-3 pt-1">
+          <div className="flex items-center">
             {[
               [Mic, 'Voice input'],
               [Upload, 'Upload file'],
               [ImageIcon, 'Upload image'],
               [Camera, 'Camera'],
-            ].map(([Icon, label]) => (
+            ].map(([Icon, label], i) => (
               <button
                 key={label}
                 type="button"
                 title={label}
                 aria-label={label}
-                className="p-2 rounded-lg text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors"
+                // hide last 2 icons on very small screens so submit button always fits
+                className={`p-2 rounded-lg text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors ${i >= 2 ? 'hidden xs:block' : ''}`}
               >
                 <Icon className="w-4 h-4" />
               </button>
             ))}
           </div>
-          <Btn type="submit" size="sm" disabled={!value.trim()} className="gap-1.5">
+          <button
+            type="submit"
+            disabled={!value.trim()}
+            className="flex items-center gap-1.5 bg-green-700 hover:bg-green-800 disabled:opacity-40 disabled:pointer-events-none text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors whitespace-nowrap"
+          >
             Ask Ubuntu AI <Send className="w-3.5 h-3.5" />
-          </Btn>
+          </button>
         </div>
       </div>
     </form>
@@ -372,7 +380,7 @@ function Mission() {
   return (
     <section id="mission" className="py-20 sm:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid sm:grid-cols-2 gap-16 items-center">
+        <div className="grid sm:grid-cols-2 gap-8 sm:gap-16 items-center">
           <div>
             <Badge className="bg-green-100 text-green-800 mb-6">Our mission</Badge>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-6 leading-tight">
@@ -387,7 +395,7 @@ function Mission() {
               Opportunity should never depend on where someone was born.
             </p>
           </div>
-          <div className="bg-green-700 rounded-3xl p-10 text-white text-center">
+          <div className="bg-green-700 rounded-3xl p-6 sm:p-10 text-white text-center">
             <p className="text-3xl sm:text-4xl font-black italic leading-snug mb-4">
               &ldquo;I am because we are.&rdquo;
             </p>
@@ -512,10 +520,10 @@ function CTABanner() {
           Join now and shape Africa's digital future.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Btn href="https://connect.ubuntu-africa.com" variant="white" size="xl">
+          <Btn href="https://connect.ubuntu-africa.com" variant="white" size="xl" className="w-full sm:w-auto">
             Try Ubuntu Connect <ArrowRight className="w-5 h-5" />
           </Btn>
-          <Btn href="#ecosystem" variant="ghost-white" size="xl">
+          <Btn href="#ecosystem" variant="ghost-white" size="xl" className="w-full sm:w-auto">
             Explore the ecosystem
           </Btn>
         </div>
@@ -532,8 +540,8 @@ function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-400 py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-10 mb-12">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center">
                 <span className="text-white text-base leading-none">🌍</span>

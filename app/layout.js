@@ -30,7 +30,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body style={{ margin: 0, fontFamily: "var(--font-inter, Inter, sans-serif)" }}>
+      <body>
         {children}
       </body>
     </html>

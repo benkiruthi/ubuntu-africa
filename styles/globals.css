@@ -1,8 +1,48 @@
-* { box-sizing: border-box; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body { margin: 0; }
+@layer base {
+  :root {
+    --radius: 0.75rem;
+  }
 
-/* Wire next/font CSS variables to the family names ubuntu-theme.css uses directly */
-:root {
-  font-family: var(--font-inter, Inter, -apple-system, BlinkMacSystemFont, sans-serif);
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html { scroll-behavior: smooth; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: inherit; }
+  img { max-width: 100%; display: block; }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, #15803d 0%, #4ade80 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-brand {
+    background: linear-gradient(135deg, #14532d 0%, #16a34a 100%);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .text-balance { text-wrap: balance; }
 }

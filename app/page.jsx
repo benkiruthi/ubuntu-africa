@@ -1,18 +1,16 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, Mic, Upload, ImageIcon, Camera, Send,
+  ArrowRight, Zap, CheckCircle2, Star,
+  Mic, Upload, ImageIcon, Camera, Send, Menu, X, ChevronDown,
   Brain, Rocket, Briefcase, DollarSign, Code, ShoppingBag,
-  Users, Sprout, Play, TrendingUp, Globe, Heart,
-  Scale, Shield, ChevronDown, ChevronUp, Menu, X,
+  Users, Sprout, Play, TrendingUp, Globe, Heart, Scale, Shield,
 } from 'lucide-react'
 import { getEcosystemList } from '@/lib/theme'
 
-// ─────────────────────────────────────────────
-// DATA
-// ─────────────────────────────────────────────
+// ── Data ───────────────────────────────────────────────────────
 
 const ROTATING_PROMPTS = [
   'Help me start a business.',
@@ -30,16 +28,16 @@ const ROTATING_PROMPTS = [
 ]
 
 const OUTCOMES = [
-  { icon: Brain,       label: 'Learn AI',            prompt: 'Teach me AI from scratch' },
-  { icon: Rocket,      label: 'Start a Business',    prompt: 'Help me start a business' },
-  { icon: Briefcase,   label: 'Find a Job',          prompt: 'Help me find a job' },
-  { icon: DollarSign,  label: 'Access Funding',      prompt: 'Help me find funding for my idea' },
-  { icon: Code,        label: 'Build a Website',     prompt: 'Help me build a website' },
-  { icon: ShoppingBag, label: 'Sell Online',         prompt: 'Help me start selling online' },
-  { icon: Users,       label: 'Find Customers',      prompt: 'Help me find customers for my business' },
-  { icon: Sprout,      label: 'Improve Your Farm',   prompt: 'Help me improve my farm and increase yield' },
-  { icon: Play,        label: 'Create Content',      prompt: 'Help me create content to grow my brand' },
-  { icon: TrendingUp,  label: 'Grow Your Business',  prompt: 'Help me grow my business' },
+  { icon: Brain,       label: 'Learn AI',           prompt: 'Teach me AI from scratch' },
+  { icon: Rocket,      label: 'Start a Business',   prompt: 'Help me start a business' },
+  { icon: Briefcase,   label: 'Find a Job',         prompt: 'Help me find a job' },
+  { icon: DollarSign,  label: 'Access Funding',     prompt: 'Help me find funding for my idea' },
+  { icon: Code,        label: 'Build a Website',    prompt: 'Help me build a website' },
+  { icon: ShoppingBag, label: 'Sell Online',        prompt: 'Help me start selling online' },
+  { icon: Users,       label: 'Find Customers',     prompt: 'Help me find customers for my business' },
+  { icon: Sprout,      label: 'Improve Your Farm',  prompt: 'Help me improve my farm and increase yield' },
+  { icon: Play,        label: 'Create Content',     prompt: 'Help me create content to grow my brand' },
+  { icon: TrendingUp,  label: 'Grow Your Business', prompt: 'Help me grow my business' },
 ]
 
 const ECO_ICONS = {
@@ -55,64 +53,73 @@ const ECO_ICONS = {
   justice:    Scale,
 }
 
-// ─────────────────────────────────────────────
-// NAV
-// ─────────────────────────────────────────────
+// ── Shared components ──────────────────────────────────────────
 
-function Nav({ onSignIn }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
+function Badge({ children, className = '' }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
-      <div className="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-green-700 flex items-center justify-center text-sm">🌍</div>
-          <span className="font-bold text-slate-900 dark:text-white text-base tracking-tight">Ubuntu Africa</span>
-        </Link>
-
-        {/* Desktop right */}
-        <div className="hidden sm:flex items-center gap-6">
-          <a href="#explore" className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Products</a>
-          <a href="#mission" className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Mission</a>
-          <a
-            href="https://connect.ubuntu-africa.com"
-            className="text-sm font-semibold text-green-700 dark:text-green-400 hover:text-green-800 transition-colors"
-          >
-            Sign in
-          </a>
-        </div>
-
-        {/* Mobile menu toggle */}
-        <button
-          className="sm:hidden p-1.5 text-slate-600 dark:text-slate-300"
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="sm:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-5 py-4 flex flex-col gap-4">
-          <a href="#explore" className="text-sm font-medium text-slate-700 dark:text-slate-300 py-1" onClick={() => setMenuOpen(false)}>Products</a>
-          <a href="#mission" className="text-sm font-medium text-slate-700 dark:text-slate-300 py-1" onClick={() => setMenuOpen(false)}>Mission</a>
-          <a
-            href="https://connect.ubuntu-africa.com"
-            className="text-sm font-semibold text-green-700 py-2 px-4 rounded-xl border border-green-200 dark:border-green-800 text-center"
-          >
-            Sign in
-          </a>
-        </div>
-      )}
-    </header>
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase ${className}`}>
+      {children}
+    </span>
   )
 }
 
-// ─────────────────────────────────────────────
-// PROMPT BOX
-// ─────────────────────────────────────────────
+function Btn({ children, variant = 'primary', size = 'md', className = '', href, onClick, type = 'button', disabled }) {
+  const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500'
+  const variants = {
+    primary:      'bg-green-700 hover:bg-green-800 text-white shadow-lg hover:-translate-y-0.5',
+    outline:      'border-2 border-green-700 text-green-800 hover:bg-green-50',
+    ghost:        'text-slate-600 hover:text-slate-900 hover:bg-slate-100',
+    white:        'bg-white text-green-800 hover:bg-green-50 shadow-lg',
+    'ghost-white':'text-white hover:bg-white/10',
+  }
+  const sizes = { sm: 'px-4 py-2 text-sm', md: 'px-6 py-3 text-base', lg: 'px-8 py-4 text-lg', xl: 'px-8 py-4 text-lg' }
+  const cls = `${base} ${variants[variant]} ${sizes[size]} ${className} ${disabled ? 'opacity-40 pointer-events-none' : ''}`
+  if (href) return <Link href={href} className={cls}>{children}</Link>
+  return <button className={cls} type={type} onClick={onClick} disabled={disabled}>{children}</button>
+}
+
+// ── Nav ────────────────────────────────────────────────────────
+
+function Nav() {
+  const [open, setOpen] = useState(false)
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center text-base">🌍</div>
+            <span className="font-bold text-lg text-slate-900">Ubuntu Africa</span>
+          </Link>
+          <div className="hidden md:flex items-center gap-8">
+            {[['What Ubuntu can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+              <a key={l} href={h} className="text-sm font-medium text-slate-600 hover:text-green-700 transition-colors">{l}</a>
+            ))}
+          </div>
+          <div className="hidden md:flex items-center gap-3">
+            <Btn href="https://connect.ubuntu-africa.com" variant="ghost" size="sm">Sign in</Btn>
+            <Btn href="https://connect.ubuntu-africa.com" size="sm">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+          </div>
+          <button className="md:hidden p-2 text-slate-600" onClick={() => setOpen(o => !o)} aria-label="Menu">
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+        {open && (
+          <div className="md:hidden py-4 border-t border-slate-100 space-y-1">
+            {[['What Ubuntu can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+              <a key={l} href={h} className="block text-sm font-medium text-slate-700 px-2 py-3 rounded-lg hover:bg-slate-50" onClick={() => setOpen(false)}>{l}</a>
+            ))}
+            <div className="flex flex-col gap-2 pt-3">
+              <Btn href="https://connect.ubuntu-africa.com" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
+              <Btn href="https://connect.ubuntu-africa.com" size="sm" className="w-full justify-center">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  )
+}
+
+// ── Prompt box ─────────────────────────────────────────────────
 
 function PromptBox({ value, onChange, onSubmit }) {
   const taRef = useRef(null)
@@ -120,9 +127,8 @@ function PromptBox({ value, onChange, onSubmit }) {
   const [typing, setTyping] = useState(true)
   const [displayed, setDisplayed] = useState('')
 
-  // Typewriter
   useEffect(() => {
-    if (value) return // stop animation once user starts typing
+    if (value) return
     const target = ROTATING_PROMPTS[idx]
     let t
     if (typing) {
@@ -154,7 +160,7 @@ function PromptBox({ value, onChange, onSubmit }) {
 
   return (
     <form onSubmit={submit} className="w-full">
-      <div className="relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-[0_4px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_32px_rgba(0,0,0,0.4)] focus-within:border-green-400 dark:focus-within:border-green-600 focus-within:shadow-[0_4px_32px_rgba(0,0,0,0.10),0_0_0_4px_rgba(21,128,61,0.08)] transition-all duration-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_4px_24px_rgba(0,0,0,0.07)] focus-within:border-green-400 focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.08),0_0_0_4px_rgba(21,128,61,0.08)] transition-all duration-200 overflow-hidden">
         <textarea
           ref={taRef}
           value={value}
@@ -162,39 +168,21 @@ function PromptBox({ value, onChange, onSubmit }) {
           onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(e) } }}
           placeholder={value ? '' : (displayed || 'Ask Ubuntu anything…')}
           rows={1}
-          className="w-full px-5 pt-4 pb-3 bg-transparent border-none outline-none resize-none text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 min-h-[56px] max-h-[160px] overflow-y-auto leading-relaxed"
+          className="w-full px-5 pt-4 pb-3 bg-transparent border-none outline-none resize-none text-base text-slate-900 placeholder:text-slate-400 min-h-[58px] max-h-[160px] overflow-y-auto leading-relaxed"
           aria-label="Ask Ubuntu AI"
         />
-
         <div className="flex items-center justify-between px-3 pb-3 pt-1 gap-2">
-          {/* Input mode icons */}
           <div className="flex items-center gap-0.5">
-            {[
-              [Mic, 'Voice'],
-              [Upload, 'File'],
-              [ImageIcon, 'Image'],
-              [Camera, 'Camera'],
-            ].map(([Icon, label], i) => (
-              <button
-                key={label}
-                type="button"
-                aria-label={label}
-                title={label}
-                className={`w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 dark:text-slate-500 hover:text-green-700 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-950/40 transition-colors ${i >= 2 ? 'hidden xs:flex' : 'flex'}`}
-              >
+            {[[Mic,'Voice'],[Upload,'File'],[ImageIcon,'Image'],[Camera,'Camera']].map(([Icon, label], i) => (
+              <button key={label} type="button" aria-label={label} title={label}
+                className={`w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-green-700 hover:bg-green-50 transition-colors ${i >= 2 ? 'hidden xs:flex' : 'flex'}`}>
                 <Icon className="w-4 h-4" />
               </button>
             ))}
           </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={!value.trim()}
-            className="flex items-center gap-2 bg-green-700 hover:bg-green-800 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all whitespace-nowrap"
-          >
-            Ask Ubuntu
-            <Send className="w-3.5 h-3.5" />
+          <button type="submit" disabled={!value.trim()}
+            className="flex items-center gap-1.5 bg-green-700 hover:bg-green-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all whitespace-nowrap">
+            Ask Ubuntu <Send className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
@@ -202,97 +190,98 @@ function PromptBox({ value, onChange, onSubmit }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// HERO
-// ─────────────────────────────────────────────
+// ── Hero ───────────────────────────────────────────────────────
 
 function Hero({ prompt, setPrompt }) {
-  const promptRef = useRef(null)
-
   function handleSubmit(text) {
     alert(`Ubuntu AI is coming soon.\n\nYou asked: "${text}"`)
   }
 
-  function fillPrompt(text) {
-    setPrompt(text)
-    promptRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    // focus the textarea
-    setTimeout(() => {
-      const ta = promptRef.current?.querySelector('textarea')
-      ta?.focus()
-    }, 400)
-  }
-
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-5 pt-14 pb-16 bg-white dark:bg-slate-950">
-      <div className="w-full max-w-2xl mx-auto text-center flex flex-col items-center">
+    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 bg-white">
+      {/* Gradient blobs — same pattern as Ubuntu Learn */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-green-50 blur-3xl opacity-70 translate-x-1/3 -translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-green-50 blur-3xl opacity-50 -translate-x-1/4" />
+      </div>
 
-        {/* Logo mark */}
-        <div className="w-14 h-14 rounded-2xl bg-green-700 flex items-center justify-center text-2xl mb-5 shadow-sm">
-          🌍
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto">
+
+          {/* Badge */}
+          <Badge className="bg-green-100 text-green-800 mb-6">
+            <Zap className="w-3 h-3" /> Africa's AI for Opportunity
+          </Badge>
+
+          {/* Tagline */}
+          <p className="text-base font-medium text-slate-400 italic mb-3">Better Together</p>
+
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-5">
+            Africa's AI<br />
+            <span className="gradient-text">for Opportunity</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg sm:text-xl text-slate-600 max-w-xl mx-auto mb-10 leading-relaxed">
+            Helping Africans learn, build, connect and earn through AI.
+          </p>
+
+          {/* Prompt — the hero */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <PromptBox value={prompt} onChange={setPrompt} onSubmit={handleSubmit} />
+          </div>
+
+          {/* Trust line */}
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-slate-500">
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-1.5">
+                {['ke','ng','gh','ug','tz'].map(cc => (
+                  <div key={cc} className="w-6 h-6 rounded-full border-2 border-white overflow-hidden flex-shrink-0">
+                    <img src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+              <span>Used across <strong className="text-slate-700">Africa</strong></span>
+            </div>
+            <div className="flex items-center gap-1">
+              {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-green-600" />
+              <span>Free to start</span>
+            </div>
+          </div>
         </div>
-
-        {/* Tagline */}
-        <p className="text-sm text-slate-400 dark:text-slate-500 italic mb-3 tracking-wide">
-          Better Together
-        </p>
-
-        {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-4">
-          Africa's AI<br />for Opportunity
-        </h1>
-
-        {/* Subheadline */}
-        <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-10 max-w-md leading-relaxed">
-          Helping Africans learn, build, connect and earn through AI.
-        </p>
-
-        {/* Prompt box */}
-        <div ref={promptRef} className="w-full mb-6">
-          <PromptBox value={prompt} onChange={setPrompt} onSubmit={handleSubmit} />
-        </div>
-
-        {/* Scroll hint */}
-        <a
-          href="#outcomes"
-          className="flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-600 hover:text-slate-600 dark:hover:text-slate-400 transition-colors mt-2"
-          aria-label="See what Ubuntu can do"
-        >
-          <span className="text-xs font-medium tracking-wide">See what Ubuntu can do</span>
-          <ChevronDown className="w-4 h-4 animate-bounce" />
-        </a>
       </div>
     </section>
   )
 }
 
-// ─────────────────────────────────────────────
-// OUTCOMES — "What can Ubuntu help you do?"
-// ─────────────────────────────────────────────
+// ── Outcomes ───────────────────────────────────────────────────
 
 function Outcomes({ onSelect }) {
   return (
-    <section id="outcomes" className="py-20 sm:py-24 px-5 bg-slate-50 dark:bg-slate-900">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white text-center mb-3 tracking-tight">
-          What can Ubuntu help you do?
-        </h2>
-        <p className="text-sm text-slate-400 dark:text-slate-500 text-center mb-10">
-          Choose a goal and Ubuntu AI will guide you.
-        </p>
+    <section id="outcomes" className="py-20 sm:py-28 bg-slate-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <Badge className="bg-green-100 text-green-800 mb-4">What Ubuntu can do</Badge>
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+            What can Ubuntu <span className="gradient-text">help you do?</span>
+          </h2>
+          <p className="text-lg text-slate-600 max-w-xl mx-auto">
+            Choose a goal — Ubuntu AI will guide you step by step.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {OUTCOMES.map(({ icon: Icon, label, prompt }) => (
-            <button
-              key={label}
-              type="button"
-              onClick={() => onSelect(prompt)}
-              className="group flex flex-col items-center gap-2.5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl p-4 text-center hover:border-green-300 dark:hover:border-green-700 hover:shadow-md hover:-translate-y-0.5 transition-all duration-150"
-            >
-              <div className="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 flex items-center justify-center group-hover:bg-green-100 dark:group-hover:bg-green-900/50 transition-colors">
-                <Icon className="w-5 h-5" />
+            <button key={label} type="button" onClick={() => onSelect(prompt)}
+              className="group flex flex-col items-center gap-3 bg-white border border-slate-100 rounded-2xl p-5 text-center hover:border-green-200 hover:shadow-md hover:-translate-y-1 transition-all duration-150">
+              <div className="w-12 h-12 rounded-xl bg-green-100 text-green-700 flex items-center justify-center group-hover:bg-green-700 group-hover:text-white transition-colors">
+                <Icon className="w-6 h-6" />
               </div>
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 leading-tight">{label}</span>
+              <span className="text-sm font-semibold text-slate-800 leading-tight">{label}</span>
             </button>
           ))}
         </div>
@@ -301,23 +290,21 @@ function Outcomes({ onSelect }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// EXPLORE — "Explore Ubuntu" (understated)
-// ─────────────────────────────────────────────
+// ── Explore Ubuntu ─────────────────────────────────────────────
 
 function ExploreUbuntu() {
   const ecosystem = getEcosystemList()
-
   return (
-    <section id="explore" className="py-20 sm:py-24 px-5 bg-white dark:bg-slate-950">
-      <div className="max-w-4xl mx-auto">
-        {/* Section label — intentionally understated */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex-1 h-px bg-slate-100 dark:bg-slate-800" />
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600 px-2">
-            Explore Ubuntu
-          </span>
-          <div className="flex-1 h-px bg-slate-100 dark:bg-slate-800" />
+    <section id="explore" className="py-20 sm:py-28 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <Badge className="bg-green-100 text-green-800 mb-4">The ecosystem</Badge>
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+            Explore <span className="gradient-text">Ubuntu</span>
+          </h2>
+          <p className="text-lg text-slate-600 max-w-xl mx-auto">
+            Ten platforms, one account, one AI. Start anywhere. Grow everywhere.
+          </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -325,128 +312,114 @@ function ExploreUbuntu() {
             const Icon = ECO_ICONS[p.slug] || Globe
             const isLive = p.status === 'live'
             return (
-              <a
-                key={p.slug}
-                href={p.href}
-                className="group flex flex-col items-center text-center bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 hover:border-slate-200 dark:hover:border-slate-700 hover:shadow-sm transition-all duration-150"
-              >
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-3"
-                  style={{ background: `${p.primary}12` }}
-                >
+              <a key={p.slug} href={p.href}
+                className="group flex flex-col items-center text-center bg-white border border-slate-100 rounded-2xl p-5 hover:border-green-200 hover:shadow-md hover:-translate-y-1 transition-all duration-150">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-3 shadow-sm"
+                  style={{ background: `${p.primary}14` }}>
                   {p.emoji}
                 </div>
-                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 mb-0.5 leading-tight">
+                <p className="text-sm font-bold text-slate-800 mb-1 leading-tight">
                   {p.name.replace('Ubuntu ', '')}
                 </p>
-                <p className="text-[11px] text-slate-400 dark:text-slate-600 leading-snug mb-2.5 line-clamp-2">
-                  {(p.tagline.split(' — ')[1] ?? p.tagline).split(' — ')[0]}
+                <p className="text-xs text-slate-400 leading-snug mb-3 line-clamp-2">
+                  {(p.tagline.split(' — ')[1] ?? p.tagline)}
                 </p>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isLive ? 'bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600'}`}>
-                  {isLive ? '● Open' : 'Soon'}
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full mt-auto ${isLive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+                  {isLive ? '● Open now' : 'Waitlist'}
                 </span>
               </a>
             )
           })}
         </div>
+
+        <p className="text-center text-sm text-slate-400 mt-8">
+          More platforms coming — built to scale to 40+ products, all sharing one AI.
+        </p>
       </div>
     </section>
   )
 }
 
-// ─────────────────────────────────────────────
-// MISSION
-// ─────────────────────────────────────────────
+// ── Mission ────────────────────────────────────────────────────
 
 function Mission() {
   return (
-    <section id="mission" className="py-20 sm:py-28 px-5 bg-slate-900 dark:bg-black">
-      <div className="max-w-xl mx-auto text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-green-500 mb-6">Our mission</p>
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-6 leading-snug tracking-tight">
+    <section id="mission" className="py-20 sm:py-28 bg-green-700">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight tracking-tight">
           Building Opportunity<br />Across Africa
         </h2>
-        <p className="text-slate-400 leading-relaxed mb-4 text-sm sm:text-base">
+        <p className="text-lg text-green-100 max-w-2xl mx-auto mb-4 leading-relaxed">
           Ubuntu exists to help every African learn new skills, build businesses, access opportunities,
           solve problems, and improve their lives with AI.
         </p>
-        <p className="text-slate-500 text-sm italic">
+        <p className="text-green-200 italic mb-10">
           Because opportunity should never depend on where someone was born.
         </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Btn href="https://connect.ubuntu-africa.com" variant="white" size="xl" className="w-full sm:w-auto">
+            Try Ubuntu Connect <ArrowRight className="w-5 h-5" />
+          </Btn>
+          <Btn href="#explore" variant="ghost-white" size="xl" className="w-full sm:w-auto">
+            Explore the ecosystem
+          </Btn>
+        </div>
+        <p className="mt-6 text-green-200 text-sm">Free · Private · Built for Africa</p>
       </div>
     </section>
   )
 }
 
-// ─────────────────────────────────────────────
-// FOOTER
-// ─────────────────────────────────────────────
+// ── Footer ─────────────────────────────────────────────────────
 
 function Footer() {
   const ecosystem = getEcosystemList()
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 px-5 py-12">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
-          {/* Brand */}
-          <div className="col-span-2 sm:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 rounded-md bg-green-700 flex items-center justify-center text-xs">🌍</div>
-              <span className="font-bold text-white text-sm">Ubuntu Africa</span>
+    <footer className="bg-slate-900 text-slate-400 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-8 sm:gap-10 mb-12">
+          <div className="col-span-2 sm:col-span-4 lg:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center text-base">🌍</div>
+              <span className="font-bold text-white text-lg">Ubuntu Africa</span>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed max-w-[180px]">
-              Africa's AI for Opportunity.
+            <p className="text-sm leading-relaxed max-w-xs">
+              Africa's AI for Opportunity. Helping every African learn, build, connect, earn, and thrive.
             </p>
+            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ubuntu Africa. All rights reserved.</p>
           </div>
-
-          {/* Products */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-600 mb-3">Products</p>
-            <ul className="space-y-2">
+            <h4 className="font-semibold text-white mb-4 text-sm">Products</h4>
+            <ul className="space-y-2.5">
               {ecosystem.slice(0, 5).map(p => (
-                <li key={p.slug}>
-                  <a href={p.href} className="text-xs text-slate-500 hover:text-white transition-colors">{p.name}</a>
-                </li>
+                <li key={p.slug}><a href={p.href} className="text-sm hover:text-white transition-colors">{p.name}</a></li>
               ))}
-              <li><a href="#explore" className="text-xs text-green-500 hover:text-green-400 transition-colors">View all →</a></li>
+              <li><a href="#explore" className="text-sm text-green-400 hover:text-green-300 transition-colors">View all →</a></li>
             </ul>
           </div>
-
-          {/* Company */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-600 mb-3">Company</p>
-            <ul className="space-y-2">
-              {['Mission', 'Blog', 'Careers', 'Contact'].map(l => (
-                <li key={l}><a href="#" className="text-xs text-slate-500 hover:text-white transition-colors">{l}</a></li>
+            <h4 className="font-semibold text-white mb-4 text-sm">Company</h4>
+            <ul className="space-y-2.5">
+              {['Mission','Blog','Careers','Foundation','Contact'].map(l => (
+                <li key={l}><a href="#" className="text-sm hover:text-white transition-colors">{l}</a></li>
               ))}
             </ul>
           </div>
-
-          {/* Legal */}
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-600 mb-3">Legal</p>
-            <ul className="space-y-2">
-              {['Privacy Policy', 'Terms of Service', 'API'].map(l => (
-                <li key={l}><a href="#" className="text-xs text-slate-500 hover:text-white transition-colors">{l}</a></li>
+            <h4 className="font-semibold text-white mb-4 text-sm">Legal</h4>
+            <ul className="space-y-2.5">
+              {['Privacy Policy','Terms of Service','API','Developers'].map(l => (
+                <li key={l}><a href="#" className="text-sm hover:text-white transition-colors">{l}</a></li>
               ))}
             </ul>
           </div>
         </div>
-
-        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-slate-600">
-            © {new Date().getFullYear()} Ubuntu Africa. All rights reserved.
-          </p>
+        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm">Made with ❤️ for Africa</p>
           <div className="flex items-center gap-1.5">
             {['ke','ng','gh','ug','tz','rw','za','et'].map(cc => (
-              <img
-                key={cc}
-                src={`https://flagcdn.com/w20/${cc}.png`}
-                alt={cc.toUpperCase()}
-                width={20}
-                height={14}
-                className="rounded-sm object-cover opacity-60 hover:opacity-100 transition-opacity"
-              />
+              <img key={cc} src={`https://flagcdn.com/w20/${cc}.png`} alt={cc.toUpperCase()}
+                width={20} height={14} className="rounded-sm object-cover opacity-60 hover:opacity-100 transition-opacity" />
             ))}
           </div>
         </div>
@@ -455,21 +428,16 @@ function Footer() {
   )
 }
 
-// ─────────────────────────────────────────────
-// PAGE
-// ─────────────────────────────────────────────
+// ── Page ───────────────────────────────────────────────────────
 
 export default function UbuntuAfricaHomepage() {
   const [prompt, setPrompt] = useState('')
-  const heroRef = useRef(null)
 
   function selectOutcome(text) {
     setPrompt(text)
-    // scroll back to prompt
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setTimeout(() => {
-      const ta = document.querySelector('textarea')
-      ta?.focus()
+      document.querySelector('textarea')?.focus()
     }, 600)
   }
 

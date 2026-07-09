@@ -266,53 +266,62 @@ const ECO_ICONS = {
 function Ecosystem() {
   const ecosystem = getEcosystemList()
   return (
-    <section id="ecosystem" className="py-20 sm:py-28 bg-white">
+    <section id="ecosystem" className="py-20 sm:py-28 bg-slate-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-14">
           <Badge className="bg-green-100 text-green-800 mb-4">The Ubuntu Ecosystem</Badge>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4">
             Ten platforms. <span className="gradient-text">One person, growing.</span>
           </h2>
-          <p className="text-lg text-slate-600 max-w-xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-xl mx-auto">
             Every platform shares one account, one AI, and one mission. Start anywhere. Grow everywhere.
           </p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {ecosystem.map(p => {
-            const Icon = ECO_ICONS[p.slug] || Globe
-            const engine = ENGINES[p.slug]
+            const isLive = p.status === 'live'
             return (
               <a
                 key={p.slug}
                 href={p.href}
-                className="group relative bg-white border border-slate-100 rounded-2xl p-5 hover:border-green-200 hover:shadow-lg hover:-translate-y-1 transition-all"
-                style={{ borderTop: `3px solid ${p.primary}` }}
+                className="group flex flex-col items-center text-center bg-white rounded-2xl p-5 border border-slate-100 hover:shadow-md hover:border-slate-200 transition-all duration-200"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center"
-                    style={{ background: `${p.primary}18` }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: p.primary }} />
-                  </div>
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${p.status === 'live' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-                    {p.status === 'live' ? '● Live' : 'Waitlist'}
-                  </span>
+                {/* Icon */}
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-3 shadow-sm"
+                  style={{ background: `${p.primary}14` }}
+                >
+                  {p.emoji}
                 </div>
-                <h3 className="font-bold text-slate-900 mb-1">{p.name}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-3">{p.tagline}</p>
-                {engine && (
-                  <p className="text-xs font-semibold text-amber-600 mb-3">⚙ {engine.name}</p>
-                )}
-                <div className="flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: p.primary }}>
-                  {p.status === 'live' ? 'Open' : 'Join waitlist'} <ArrowRight className="w-3 h-3" />
-                </div>
+
+                {/* Name */}
+                <p className="font-bold text-slate-800 text-sm leading-tight mb-1">
+                  {p.name.replace('Ubuntu ', '')}
+                </p>
+
+                {/* One-line description */}
+                <p className="text-xs text-slate-400 leading-snug mb-3 line-clamp-2">
+                  {p.tagline.split(' — ')[1] ?? p.tagline}
+                </p>
+
+                {/* Status pill */}
+                <span
+                  className={`mt-auto text-xs font-semibold px-2.5 py-1 rounded-full ${
+                    isLive
+                      ? 'bg-green-50 text-green-700'
+                      : 'bg-slate-100 text-slate-500'
+                  }`}
+                >
+                  {isLive ? '● Open now' : 'Join waitlist'}
+                </span>
               </a>
             )
           })}
         </div>
-        <p className="text-center text-sm text-slate-400 mt-10">
-          More products coming — the ecosystem is built to grow to 40+ platforms, all sharing one AI.
+
+        <p className="text-center text-sm text-slate-400 mt-8">
+          More platforms coming — built to scale to 40+ products, all sharing one AI.
         </p>
       </div>
     </section>

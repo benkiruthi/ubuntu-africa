@@ -199,7 +199,7 @@ export default function UbuntuJobsPage() {
 
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
-        <span className="ux-section-eyebrow">Ubuntu Africa</span>
+        <span className="ux-section-eyebrow">Ebbli</span>
         <h2>One Ubuntu AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
@@ -232,7 +232,7 @@ export default function UbuntuJobsPage() {
         <p className="ux-form-note" aria-live="polite">
           {status === "done" && "🎉 You're on the list — pole sana for waiting, we'll write soon."}
           {status === "error" && "Something went wrong — please try again."}
-          {(status === "idle" || status === "loading") && "Free · Private · Part of the Ubuntu Africa ecosystem"}
+          {(status === "idle" || status === "loading") && "Free · Private · Part of the Ebbli ecosystem"}
         </p>
       </section>
     </main>

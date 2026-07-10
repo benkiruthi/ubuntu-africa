@@ -88,7 +88,7 @@ function Nav() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center text-base">🌍</div>
-            <span className="font-bold text-lg text-slate-900">Ubuntu Africa</span>
+            <span className="font-bold text-lg text-slate-900">Ebbli</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             {[['What Ubuntu can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
@@ -96,8 +96,8 @@ function Nav() {
             ))}
           </div>
           <div className="hidden md:flex items-center gap-3">
-            <Btn href="https://connect.ubuntu-africa.com" variant="ghost" size="sm">Sign in</Btn>
-            <Btn href="https://connect.ubuntu-africa.com" size="sm">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+            <Btn href="https://connect.ebbli.co" variant="ghost" size="sm">Sign in</Btn>
+            <Btn href="https://connect.ebbli.co" size="sm">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
           </div>
           <button className="md:hidden p-2 text-slate-600" onClick={() => setOpen(o => !o)} aria-label="Menu">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -109,8 +109,8 @@ function Nav() {
               <a key={l} href={h} className="block text-sm font-medium text-slate-700 px-2 py-3 rounded-lg hover:bg-slate-50" onClick={() => setOpen(false)}>{l}</a>
             ))}
             <div className="flex flex-col gap-2 pt-3">
-              <Btn href="https://connect.ubuntu-africa.com" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
-              <Btn href="https://connect.ubuntu-africa.com" size="sm" className="w-full justify-center">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+              <Btn href="https://connect.ebbli.co" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
+              <Btn href="https://connect.ebbli.co" size="sm" className="w-full justify-center">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
             </div>
           </div>
         )}
@@ -357,7 +357,7 @@ function Mission() {
           Because opportunity should never depend on where someone was born.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Btn href="https://connect.ubuntu-africa.com" variant="white" size="xl" className="w-full sm:w-auto">
+          <Btn href="https://connect.ebbli.co" variant="white" size="xl" className="w-full sm:w-auto">
             Try Ubuntu Connect <ArrowRight className="w-5 h-5" />
           </Btn>
           <Btn href="#explore" variant="ghost-white" size="xl" className="w-full sm:w-auto">
@@ -381,12 +381,12 @@ function Footer() {
           <div className="col-span-2 sm:col-span-4 lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-green-700 flex items-center justify-center text-base">🌍</div>
-              <span className="font-bold text-white text-lg">Ubuntu Africa</span>
+              <span className="font-bold text-white text-lg">Ebbli</span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs">
               Africa's AI for Opportunity. Helping every African learn, build, connect, earn, and thrive.
             </p>
-            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ubuntu Africa. All rights reserved.</p>
+            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ebbli. All rights reserved.</p>
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4 text-sm">Products</h4>

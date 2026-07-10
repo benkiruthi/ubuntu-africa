@@ -18,10 +18,10 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Ubuntu Africa",
+  title: "Ebbli",
   description: BRAND.mission,
   openGraph: {
-    title: "Ubuntu Africa",
+    title: "Ebbli",
     description: BRAND.mission,
     type: "website",
   },

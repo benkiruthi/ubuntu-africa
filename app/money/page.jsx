@@ -33,14 +33,14 @@ const AREAS = [
 const FAQS = [
   { q: "Does Amana give investment or tax advice?", a: "Amana builds financial understanding and habits, but for personalised investment, tax, or legal decisions, consult a qualified professional." },
   { q: "I'm in debt and embarrassed about it — is this for me?", a: "Especially for you. Amana is built to help without judgment, with a realistic plan to work through it." },
-  { q: "Is Ubuntu Money really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
+  { q: "Is Ebbli Money really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
 ];
 
 const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuMoneyPage() {
+export default function EbbliMoneyPage() {
   const theme = getTheme("money");
   const coach = COACHES.money;
   const engine = ENGINES.money;
@@ -90,7 +90,7 @@ export default function UbuntuMoneyPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">💰 Develop the steward</span>
         <h1>
-          Most finance apps just track spending. <em>Ubuntu Money builds the habits underneath it.</em>
+          Most finance apps just track spending. <em>Ebbli Money builds the habits underneath it.</em>
         </h1>
         <p className="ux-hero-dek">
           The real problem isn&rsquo;t low income — it&rsquo;s that most
@@ -211,7 +211,7 @@ export default function UbuntuMoneyPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

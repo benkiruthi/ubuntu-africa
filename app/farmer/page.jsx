@@ -33,14 +33,14 @@ const AREAS = [
 const FAQS = [
   { q: "Can Mavuno diagnose a crop disease for me?", a: "Mavuno gives practical guidance from what you describe or photograph, but for expert field assessment, always consult your local agricultural extension officer." },
   { q: "Does this work without reliable internet?", a: "Yes — built for real rural conditions, with offline access to core guidance and a light footprint on data." },
-  { q: "Is Ubuntu Farmer really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
+  { q: "Is Ebbli Farmer really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
 ];
 
 const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuFarmerPage() {
+export default function EbbliFarmerPage() {
   const theme = getTheme("farmer");
   const coach = COACHES.farmer;
   const engine = ENGINES.farmer;
@@ -90,7 +90,7 @@ export default function UbuntuFarmerPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">🌾 Develop the provider</span>
         <h1>
-          Most farming tools just give tips. <em>Ubuntu Farmer plans the whole season with you.</em>
+          Most farming tools just give tips. <em>Ebbli Farmer plans the whole season with you.</em>
         </h1>
         <p className="ux-hero-dek">
           The real problem isn&rsquo;t low production — it&rsquo;s that
@@ -154,7 +154,7 @@ export default function UbuntuFarmerPage() {
         <span className="ux-section-eyebrow">Layer 3 — Community</span>
         <h2>&ldquo;I am because we are.&rdquo;</h2>
         <p>
-          Cooperatives, mentorship, and equipment sharing — Ubuntu means
+          Cooperatives, mentorship, and equipment sharing — Ebbli means
           farmers prosper together, not alone.
         </p>
       </section>
@@ -211,7 +211,7 @@ export default function UbuntuFarmerPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

@@ -56,12 +56,12 @@ export default function HeroPrompt() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!value.trim()) return;
-    // Future: route to Ubuntu AI workspace
-    alert(`Ubuntu AI is coming soon! You asked: "${value}"`);
+    // Future: route to Ebbli AI workspace
+    alert(`Ebbli AI is coming soon! You asked: "${value}"`);
   };
 
   return (
-    <form className="hero-prompt" onSubmit={handleSubmit} role="search" aria-label="Ask Ubuntu AI">
+    <form className="hero-prompt" onSubmit={handleSubmit} role="search" aria-label="Ask Ebbli AI">
       <div className="hero-prompt-inner">
         <textarea
           ref={textareaRef}
@@ -79,7 +79,7 @@ export default function HeroPrompt() {
               handleSubmit(e);
             }
           }}
-          placeholder={displayedPlaceholder || "Ask Ubuntu AI anything…"}
+          placeholder={displayedPlaceholder || "Ask Ebbli AI anything…"}
           rows={1}
           aria-label="Your question or goal"
         />
@@ -118,9 +118,9 @@ export default function HeroPrompt() {
             type="submit"
             className="hero-prompt-submit"
             disabled={!value.trim()}
-            aria-label="Ask Ubuntu AI"
+            aria-label="Ask Ebbli AI"
           >
-            Ask Ubuntu AI
+            Ask Ebbli AI
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>

@@ -32,15 +32,15 @@ const AREAS = [
 
 const FAQS = [
   { q: "Is Afya a replacement for my doctor?", a: "No. Afya helps you build healthy habits, but it does not diagnose or replace a qualified healthcare professional. For diagnosis, emergencies, or treatment, always see a doctor or clinic." },
-  { q: "Is Ubuntu Health really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
-  { q: "What if I have an emergency?", a: "Ubuntu Health is not an emergency service. If you're in immediate danger, contact local emergency services or go to the nearest clinic right away." },
+  { q: "Is Ebbli Health really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
+  { q: "What if I have an emergency?", a: "Ebbli Health is not an emergency service. If you're in immediate danger, contact local emergency services or go to the nearest clinic right away." },
 ];
 
 const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuHealthPage() {
+export default function EbbliHealthPage() {
   const theme = getTheme("health");
   const coach = COACHES.health;
   const engine = ENGINES.health;
@@ -90,7 +90,7 @@ export default function UbuntuHealthPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">🩺 Develop the body</span>
         <h1>
-          Most healthcare waits for you to get sick. <em>Ubuntu Health helps you stay well first.</em>
+          Most healthcare waits for you to get sick. <em>Ebbli Health helps you stay well first.</em>
         </h1>
         <p className="ux-hero-dek">
           The real problem isn&rsquo;t a lack of clinics — it&rsquo;s that
@@ -211,7 +211,7 @@ export default function UbuntuHealthPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

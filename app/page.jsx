@@ -91,13 +91,13 @@ function Nav() {
             <span className="font-bold text-lg text-slate-900">Ebbli</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            {[['What Ubuntu can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+            {[['What Ebbli can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
               <a key={l} href={h} className="text-sm font-medium text-slate-600 hover:text-green-700 transition-colors">{l}</a>
             ))}
           </div>
           <div className="hidden md:flex items-center gap-3">
             <Btn href="https://connect.ebbli.co" variant="ghost" size="sm">Sign in</Btn>
-            <Btn href="https://connect.ebbli.co" size="sm">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+            <Btn href="https://connect.ebbli.co" size="sm">Try Ebbli Connect <ArrowRight className="w-4 h-4" /></Btn>
           </div>
           <button className="md:hidden p-2 text-slate-600" onClick={() => setOpen(o => !o)} aria-label="Menu">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -105,12 +105,12 @@ function Nav() {
         </div>
         {open && (
           <div className="md:hidden py-4 border-t border-slate-100 space-y-1">
-            {[['What Ubuntu can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+            {[['What Ebbli can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
               <a key={l} href={h} className="block text-sm font-medium text-slate-700 px-2 py-3 rounded-lg hover:bg-slate-50" onClick={() => setOpen(false)}>{l}</a>
             ))}
             <div className="flex flex-col gap-2 pt-3">
               <Btn href="https://connect.ebbli.co" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
-              <Btn href="https://connect.ebbli.co" size="sm" className="w-full justify-center">Try Ubuntu Connect <ArrowRight className="w-4 h-4" /></Btn>
+              <Btn href="https://connect.ebbli.co" size="sm" className="w-full justify-center">Try Ebbli Connect <ArrowRight className="w-4 h-4" /></Btn>
             </div>
           </div>
         )}
@@ -166,10 +166,10 @@ function PromptBox({ value, onChange, onSubmit }) {
           value={value}
           onChange={e => { onChange(e.target.value); grow(e) }}
           onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(e) } }}
-          placeholder={value ? '' : (displayed || 'Ask Ubuntu anything…')}
+          placeholder={value ? '' : (displayed || 'Ask Ebbli anything…')}
           rows={1}
           className="w-full px-5 pt-4 pb-3 bg-transparent border-none outline-none resize-none text-base text-slate-900 placeholder:text-slate-400 min-h-[58px] max-h-[160px] overflow-y-auto leading-relaxed"
-          aria-label="Ask Ubuntu AI"
+          aria-label="Ask Ebbli AI"
         />
         <div className="flex items-center justify-between px-3 pb-3 pt-1 gap-2">
           <div className="flex items-center gap-0.5">
@@ -182,7 +182,7 @@ function PromptBox({ value, onChange, onSubmit }) {
           </div>
           <button type="submit" disabled={!value.trim()}
             className="flex items-center gap-1.5 bg-green-700 hover:bg-green-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all whitespace-nowrap">
-            Ask Ubuntu <Send className="w-3.5 h-3.5" />
+            Ask Ebbli <Send className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
@@ -194,12 +194,12 @@ function PromptBox({ value, onChange, onSubmit }) {
 
 function Hero({ prompt, setPrompt }) {
   function handleSubmit(text) {
-    alert(`Ubuntu AI is coming soon.\n\nYou asked: "${text}"`)
+    alert(`Ebbli AI is coming soon.\n\nYou asked: "${text}"`)
   }
 
   return (
     <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 bg-white">
-      {/* Gradient blobs — same pattern as Ubuntu Learn */}
+      {/* Gradient blobs — same pattern as Ebbli Learn */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-green-50 blur-3xl opacity-70 translate-x-1/3 -translate-y-1/4" />
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-green-50 blur-3xl opacity-50 -translate-x-1/4" />
@@ -265,12 +265,12 @@ function Outcomes({ onSelect }) {
     <section id="outcomes" className="py-20 sm:py-28 bg-slate-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <Badge className="bg-green-100 text-green-800 mb-4">What Ubuntu can do</Badge>
+          <Badge className="bg-green-100 text-green-800 mb-4">What Ebbli can do</Badge>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-            What can Ubuntu <span className="gradient-text">help you do?</span>
+            What can Ebbli <span className="gradient-text">help you do?</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-xl mx-auto">
-            Choose a goal — Ubuntu AI will guide you step by step.
+            Choose a goal — Ebbli AI will guide you step by step.
           </p>
         </div>
 
@@ -290,9 +290,9 @@ function Outcomes({ onSelect }) {
   )
 }
 
-// ── Explore Ubuntu ─────────────────────────────────────────────
+// ── Explore Ebbli ─────────────────────────────────────────────
 
-function ExploreUbuntu() {
+function ExploreEbbli() {
   const ecosystem = getEcosystemList()
   return (
     <section id="explore" className="py-20 sm:py-28 bg-white">
@@ -300,7 +300,7 @@ function ExploreUbuntu() {
         <div className="text-center mb-12">
           <Badge className="bg-green-100 text-green-800 mb-4">The ecosystem</Badge>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-            Explore <span className="gradient-text">Ubuntu</span>
+            Explore <span className="gradient-text">Ebbli</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-xl mx-auto">
             Ten platforms, one account, one AI. Start anywhere. Grow everywhere.
@@ -319,7 +319,7 @@ function ExploreUbuntu() {
                   {p.emoji}
                 </div>
                 <p className="text-sm font-bold text-slate-800 mb-1 leading-tight">
-                  {p.name.replace('Ubuntu ', '')}
+                  {p.name.replace('Ebbli ', '')}
                 </p>
                 <p className="text-xs text-slate-400 leading-snug mb-3 line-clamp-2">
                   {(p.tagline.split(' — ')[1] ?? p.tagline)}
@@ -350,7 +350,7 @@ function Mission() {
           Building Opportunity<br />Across Africa
         </h2>
         <p className="text-lg text-green-100 max-w-2xl mx-auto mb-4 leading-relaxed">
-          Ubuntu exists to help every African learn new skills, build businesses, access opportunities,
+          Ebbli exists to help every African learn new skills, build businesses, access opportunities,
           solve problems, and improve their lives with AI.
         </p>
         <p className="text-green-200 italic mb-10">
@@ -358,7 +358,7 @@ function Mission() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Btn href="https://connect.ebbli.co" variant="white" size="xl" className="w-full sm:w-auto">
-            Try Ubuntu Connect <ArrowRight className="w-5 h-5" />
+            Try Ebbli Connect <ArrowRight className="w-5 h-5" />
           </Btn>
           <Btn href="#explore" variant="ghost-white" size="xl" className="w-full sm:w-auto">
             Explore the ecosystem
@@ -430,7 +430,7 @@ function Footer() {
 
 // ── Page ───────────────────────────────────────────────────────
 
-export default function UbuntuAfricaHomepage() {
+export default function EbbliHomepage() {
   const [prompt, setPrompt] = useState('')
 
   function selectOutcome(text) {
@@ -447,7 +447,7 @@ export default function UbuntuAfricaHomepage() {
       <main>
         <Hero prompt={prompt} setPrompt={setPrompt} />
         <Outcomes onSelect={selectOutcome} />
-        <ExploreUbuntu />
+        <ExploreEbbli />
         <Mission />
       </main>
       <Footer />

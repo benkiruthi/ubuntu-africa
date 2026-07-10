@@ -33,14 +33,14 @@ const AREAS = [
 const FAQS = [
   { q: "How is this different from a CRM or accounting app?", a: "The Business Builder acts like an AI co-founder — recommending the one action that matters most today, not just tracking numbers after the fact." },
   { q: "I don't have a business yet — is this for me?", a: "Yes. Jenga starts with a discovery conversation to help you find an idea that fits your skills and local opportunities." },
-  { q: "Is Ubuntu Business really free?", a: "Yes — free to start, always. No credit card required to join the waitlist." },
+  { q: "Is Ebbli Business really free?", a: "Yes — free to start, always. No credit card required to join the waitlist." },
 ];
 
 const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuBusinessPage() {
+export default function EbbliBusinessPage() {
   const theme = getTheme("business");
   const coach = COACHES.business;
   const engine = ENGINES.business;
@@ -90,7 +90,7 @@ export default function UbuntuBusinessPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">🌱 Develop the builder</span>
         <h1>
-          People start businesses. <em>Ubuntu Business builds business builders.</em>
+          People start businesses. <em>Ebbli Business builds business builders.</em>
         </h1>
         <p className="ux-hero-dek">
           Most businesses don&rsquo;t fail from a bad idea — they fail
@@ -155,7 +155,7 @@ export default function UbuntuBusinessPage() {
         <h2>&ldquo;I am because we are.&rdquo;</h2>
         <p>
           Founder circles, mentorship, and mastermind groups — businesses
-          started alone are fragile. Ubuntu Business is built for growing
+          started alone are fragile. Ebbli Business is built for growing
           together.
         </p>
       </section>
@@ -202,7 +202,7 @@ export default function UbuntuBusinessPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

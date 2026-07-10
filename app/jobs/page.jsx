@@ -33,14 +33,14 @@ const AREAS = [
 const FAQS = [
   { q: "How is this different from a job board?", a: "The Opportunity Matcher actively matches you to opportunities based on skills, values, and growth potential — not a keyword search you run yourself." },
   { q: "I'm not looking for a formal job — is this for me?", a: "Yes. Freelancers, founders, and gig workers get matched too, not just people applying to companies." },
-  { q: "Is Ubuntu Jobs really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
+  { q: "Is Ebbli Jobs really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
 ];
 
 const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuJobsPage() {
+export default function EbbliJobsPage() {
   const theme = getTheme("jobs");
   const coach = COACHES.jobs;
   const engine = ENGINES.jobs;
@@ -89,7 +89,7 @@ export default function UbuntuJobsPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">💼 Develop the professional</span>
         <h1>
-          Schools produce graduates. <em>Ubuntu Jobs builds professionals.</em>
+          Schools produce graduates. <em>Ebbli Jobs builds professionals.</em>
         </h1>
         <p className="ux-hero-dek">
           The real problem isn&rsquo;t a lack of job ads — it&rsquo;s that
@@ -200,7 +200,7 @@ export default function UbuntuJobsPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

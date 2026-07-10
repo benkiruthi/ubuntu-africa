@@ -32,7 +32,7 @@ const AREAS = [
 
 const FAQS = [
   { q: "How is this different from a course platform?", a: "The Learning Path Builder actively generates and adapts your journey — missions, lessons, projects — instead of leaving you to browse a static video library." },
-  { q: "Is Ubuntu Learn really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
+  { q: "Is Ebbli Learn really free?", a: "Yes — the core platform is free, always. No credit card required to join the waitlist." },
   { q: "Do I need fast internet?", a: "No — built for low data, works on any phone, with offline lessons where possible." },
 ];
 
@@ -40,7 +40,7 @@ const CONFETTI_EMOJI = ["🎉", "✨", "🎊", "⭐"];
 
 /* ---------- COMPONENT ---------- */
 
-export default function UbuntuLearnPage() {
+export default function EbbliLearnPage() {
   const theme = getTheme("learn");
   const coach = COACHES.learn;
   const engine = ENGINES.learn;
@@ -90,7 +90,7 @@ export default function UbuntuLearnPage() {
       <section className="ux-hero">
         <span className="ux-eyebrow">🎓 Develop the mind</span>
         <h1>
-          Schools teach subjects. <em>Ubuntu Learn builds learners.</em>
+          Schools teach subjects. <em>Ebbli Learn builds learners.</em>
         </h1>
         <p className="ux-hero-dek">
           Most people never become lifelong learners — not because they lack
@@ -158,7 +158,7 @@ export default function UbuntuLearnPage() {
         <h2>&ldquo;I am because we are.&rdquo;</h2>
         <p>
           Study circles, peer accountability, and mentorship. Transformation
-          doesn&rsquo;t happen in isolation — Ubuntu Learn is built around
+          doesn&rsquo;t happen in isolation — Ebbli Learn is built around
           growing with others, not just a personal dashboard.
         </p>
       </section>
@@ -207,7 +207,7 @@ export default function UbuntuLearnPage() {
       {/* ---------- ECOSYSTEM ---------- */}
       <section className="ux-ecosystem">
         <span className="ux-section-eyebrow">Ebbli</span>
-        <h2>One Ubuntu AI, one mission, seven platforms.</h2>
+        <h2>One Ebbli AI, one mission, seven platforms.</h2>
         <ul className="ux-ecosystem-grid">
           {ecosystem.map((p) => (
             <li key={p.slug}>

@@ -405,7 +405,7 @@ function Footer() {
             <p className="text-sm leading-relaxed max-w-xs">
               Africa's AI for Opportunity. Helping every African learn, build, connect, earn, and thrive.
             </p>
-            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ebbli. All rights reserved.</p>
+            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ebbli Technologies. All rights reserved.</p>
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4 text-sm">Products</h4>

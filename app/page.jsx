@@ -108,7 +108,7 @@ function Nav() {
           </div>
           <div className="hidden md:flex items-center gap-3">
             <Btn href="https://connect.ebbli.co" variant="ghost" size="sm">Sign in</Btn>
-            <Btn href="https://connect.ebbli.co" size="sm">Try Ebbli Connect <ArrowRight className="w-4 h-4" /></Btn>
+            <Btn href="#explore" size="sm">Explore the ecosystem</Btn>
           </div>
           <button className="md:hidden p-2 text-slate-600" onClick={() => setOpen(o => !o)} aria-label="Menu">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -121,7 +121,7 @@ function Nav() {
             ))}
             <div className="flex flex-col gap-2 pt-3">
               <Btn href="https://connect.ebbli.co" variant="outline" size="sm" className="w-full justify-center">Sign in</Btn>
-              <Btn href="https://connect.ebbli.co" size="sm" className="w-full justify-center">Try Ebbli Connect <ArrowRight className="w-4 h-4" /></Btn>
+              <Btn href="#explore" size="sm" className="w-full justify-center">Explore the ecosystem</Btn>
             </div>
           </div>
         )}
@@ -373,11 +373,8 @@ function Mission() {
           Because opportunity should never depend on where someone was born.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Btn href="https://connect.ebbli.co" variant="white" size="xl" className="w-full sm:w-auto">
-            Try Ebbli Connect <ArrowRight className="w-5 h-5" />
-          </Btn>
-          <Btn href="#explore" variant="ghost-white" size="xl" className="w-full sm:w-auto">
-            Explore the ecosystem
+          <Btn href="#explore" variant="white" size="xl" className="w-full sm:w-auto">
+            Explore the ecosystem <ArrowRight className="w-5 h-5" />
           </Btn>
         </div>
         <p className="mt-6 opacity-70 text-sm">Free · Private · Built for Africa</p>

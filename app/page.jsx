@@ -378,47 +378,43 @@ function MadeForAfrica() {
 function Footer() {
   const ecosystem = getEcosystemList()
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <footer className="bg-slate-50 border-t border-slate-200 text-slate-500">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-8 sm:gap-10 mb-12">
           <div className="col-span-2 sm:col-span-4 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base text-white" style={{ background: PINK }}>🌍</div>
-              <span className="font-bold text-white text-lg">Ebbli</span>
-            </div>
-            <p className="text-sm leading-relaxed max-w-xs">
+            <span className="font-bold text-xl tracking-tight mb-4 block" style={{ color: PINK }}>Ebbli</span>
+            <p className="text-sm leading-relaxed max-w-xs text-slate-500">
               Africa's AI for Opportunity. Helping every African learn, build, connect, earn, and thrive.
             </p>
-            <p className="text-xs mt-4 text-slate-500">© {new Date().getFullYear()} Ebbli Technologies. All rights reserved.</p>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Products</h4>
+            <h4 className="font-semibold text-slate-900 mb-4 text-sm">Products</h4>
             <ul className="space-y-2.5">
               {ecosystem.slice(0, 5).map(p => (
-                <li key={p.slug}><a href={p.href} className="text-sm hover:text-white transition-colors">{p.name}</a></li>
+                <li key={p.slug}><a href={p.href} className="text-sm text-slate-500 hover:text-slate-900 transition-colors">{p.name}</a></li>
               ))}
-              <li><a href="#explore" className="text-sm hover:text-rose-300 transition-colors" style={{ color: PINK }}>View all →</a></li>
+              <li><a href="#explore" className="text-sm font-semibold transition-colors" style={{ color: PINK }}>View all →</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Company</h4>
+            <h4 className="font-semibold text-slate-900 mb-4 text-sm">Company</h4>
             <ul className="space-y-2.5">
-              {['Mission','Blog','Careers','Foundation','Contact'].map(l => (
-                <li key={l}><a href="#" className="text-sm hover:text-white transition-colors">{l}</a></li>
+              {[['Mission','#mission'],['Blog','#'],['Careers','#'],['Contact','mailto:hey@ebbli.co']].map(([l, h]) => (
+                <li key={l}><a href={h} className="text-sm text-slate-500 hover:text-slate-900 transition-colors">{l}</a></li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm">Legal</h4>
+            <h4 className="font-semibold text-slate-900 mb-4 text-sm">Legal</h4>
             <ul className="space-y-2.5">
-              {['Privacy Policy','Terms of Service','API','Developers'].map(l => (
-                <li key={l}><a href="#" className="text-sm hover:text-white transition-colors">{l}</a></li>
+              {[['Privacy Policy','#'],['Terms of Service','#']].map(([l, h]) => (
+                <li key={l}><a href={h} className="text-sm text-slate-500 hover:text-slate-900 transition-colors">{l}</a></li>
               ))}
             </ul>
           </div>
         </div>
-        <div className="border-t border-slate-800 pt-8 text-center">
-          <p className="text-sm">© {new Date().getFullYear()} Ebbli Technologies. All rights reserved.</p>
+        <div className="border-t border-slate-200 pt-8 text-center">
+          <p className="text-sm text-slate-400">© {new Date().getFullYear()} Ebbli Technologies. All rights reserved.</p>
         </div>
       </div>
     </footer>

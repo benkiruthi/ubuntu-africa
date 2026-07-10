@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, Menu, X,
+  ArrowRight, Zap, CheckCircle2, Star,
+  Mic, Upload, ImageIcon, Camera, Send, Menu, X,
   Brain, Rocket, Briefcase, DollarSign,
   Users, Sprout, Globe, Heart, Shield,
   Home, Hammer,
@@ -12,7 +13,102 @@ import { getEcosystemList } from '../lib/theme'
 
 const PINK = '#f04e6b'
 
+const ROTATING_PROMPTS = [
+  'Help me start a business.',
+  'Teach me AI.',
+  'Find funding for my idea.',
+  'Write my CV.',
+  'Help me find customers.',
+  'Improve my farm yield.',
+  'Help me grow my business.',
+  'Find me a mentor.',
+  'Help me build a website.',
+  'How do I export my products?',
+  'Help me find a job.',
+  'Teach me how to invest.',
+]
+
 // ── Shared ─────────────────────────────────────────────────────
+
+function Badge({ children, className = '', style = {} }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase ${className}`} style={style}>
+      {children}
+    </span>
+  )
+}
+
+function PromptBox({ value, onChange, onSubmit }) {
+  const taRef = useRef(null)
+  const [idx, setIdx] = useState(0)
+  const [typing, setTyping] = useState(true)
+  const [displayed, setDisplayed] = useState('')
+
+  useEffect(() => {
+    if (value) return
+    const target = ROTATING_PROMPTS[idx]
+    let t
+    if (typing) {
+      if (displayed.length < target.length) {
+        t = setTimeout(() => setDisplayed(target.slice(0, displayed.length + 1)), 40)
+      } else {
+        t = setTimeout(() => setTyping(false), 2000)
+      }
+    } else {
+      if (displayed.length > 0) {
+        t = setTimeout(() => setDisplayed(d => d.slice(0, -1)), 20)
+      } else {
+        setIdx(i => (i + 1) % ROTATING_PROMPTS.length)
+        setTyping(true)
+      }
+    }
+    return () => clearTimeout(t)
+  }, [displayed, typing, idx, value])
+
+  function grow(e) {
+    e.target.style.height = 'auto'
+    e.target.style.height = Math.min(e.target.scrollHeight, 160) + 'px'
+  }
+
+  function submit(e) {
+    e.preventDefault()
+    if (value.trim()) onSubmit(value.trim())
+  }
+
+  return (
+    <form onSubmit={submit} className="w-full">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_4px_24px_rgba(0,0,0,0.07)] focus-within:border-rose-300 focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.08),0_0_0_4px_rgba(240,78,107,0.08)] transition-all duration-200 overflow-hidden">
+        <textarea
+          ref={taRef}
+          value={value}
+          onChange={e => { onChange(e.target.value); grow(e) }}
+          onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(e) } }}
+          placeholder={value ? '' : (displayed || 'Ask Ebbli anything…')}
+          rows={1}
+          className="w-full px-5 pt-4 pb-3 bg-transparent border-none outline-none resize-none text-base text-slate-900 placeholder:text-slate-400 min-h-[58px] max-h-[160px] overflow-y-auto leading-relaxed"
+          aria-label="Ask Ebbli AI"
+        />
+        <div className="flex items-center justify-between px-3 pb-3 pt-1 gap-2">
+          <div className="flex items-center gap-0.5">
+            {[[Mic,'Voice'],[Upload,'File'],[ImageIcon,'Image'],[Camera,'Camera']].map(([Icon, label], i) => (
+              <button key={label} type="button" aria-label={label} title={label}
+                className={`w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-rose-50 transition-colors ${i >= 2 ? 'hidden xs:flex' : 'flex'}`}
+                onMouseOver={e => e.currentTarget.style.color = PINK}
+                onMouseOut={e => e.currentTarget.style.color = ''}>
+                <Icon className="w-4 h-4" />
+              </button>
+            ))}
+          </div>
+          <button type="submit" disabled={!value.trim()}
+            className="flex items-center gap-1.5 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all whitespace-nowrap"
+            style={{ background: value.trim() ? PINK : undefined }}>
+            Ask Ebbli <Send className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+    </form>
+  )
+}
 
 function Btn({ children, variant = 'primary', size = 'md', className = '', href, onClick }) {
   const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none'
@@ -71,47 +167,56 @@ function Nav() {
 
 // ── Hero ───────────────────────────────────────────────────────
 
-function Hero() {
+function Hero({ prompt, setPrompt }) {
+  function handleSubmit(text) {
+    alert(`Ebbli AI is coming soon.\n\nYou asked: "${text}"`)
+  }
+
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 bg-white text-center">
+    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 bg-white">
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-50 translate-x-1/3 -translate-y-1/4" style={{ background: '#fce7ec' }} />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl opacity-30 -translate-x-1/4" style={{ background: '#fce7ec' }} />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-60 translate-x-1/3 -translate-y-1/4" style={{ background: '#fce7ec' }} />
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full blur-3xl opacity-40 -translate-x-1/4" style={{ background: '#fce7ec' }} />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full mb-8 uppercase tracking-wider text-white" style={{ background: PINK }}>
-          Now live across Africa
-        </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto">
 
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight mb-6">
-          Learn AI, Find Work,<br />
-          <span style={{ color: PINK }}>Build a Business & More.</span>
-        </h1>
+          <Badge className="mb-6 text-white" style={{ background: PINK }}>
+            <Zap className="w-3 h-3" /> Africa's AI for Opportunity
+          </Badge>
 
-        <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Africa's AI platform for opportunity. Learn new skills, find a job, grow your business, find a partner, improve your farm — all in one place. Free to start.
-        </p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-5">
+            Learn AI, Find Work,<br />
+            <span style={{ color: PINK }}>Build a Business & More.</span>
+          </h1>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
-          <Btn href="https://learn.ebbli.co" size="lg">
-            Start for free <ArrowRight className="w-5 h-5" />
-          </Btn>
-          <Btn href="#explore" variant="dark" size="lg">
-            Explore the ecosystem
-          </Btn>
-        </div>
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Africa's AI platform for opportunity. Learn new skills, find a job, grow your business, find a partner, improve your farm, and more — all in one place. Free to start.
+          </p>
 
-        {/* Trust bar */}
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-400">
-          {[
-            '✓ Free to start',
-            '✓ 13 countries',
-            '✓ AI-powered',
-            '✓ No credit card',
-          ].map(t => (
-            <span key={t} className="font-medium">{t}</span>
-          ))}
+          <div className="max-w-2xl mx-auto mb-8">
+            <PromptBox value={prompt} onChange={setPrompt} onSubmit={handleSubmit} />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-slate-500">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {['ke','ng','gh','ug','tz'].map(cc => (
+                  <img key={cc} src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()}
+                    width={24} height={16} className="rounded-sm object-cover border border-slate-100" />
+                ))}
+              </div>
+              <span>Used across <strong className="text-slate-700">Africa</strong></span>
+            </div>
+            <div className="flex items-center gap-1">
+              {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4" style={{ color: PINK }} />
+              <span>Free to start</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -406,11 +511,12 @@ function Footer() {
 // ── Page ───────────────────────────────────────────────────────
 
 export default function EbbliHomepage() {
+  const [prompt, setPrompt] = useState('')
   return (
     <>
       <Nav />
       <main>
-        <Hero />
+        <Hero prompt={prompt} setPrompt={setPrompt} />
         <StatsMarquee />
         <ExploreEbbli />
         <Testimonials />

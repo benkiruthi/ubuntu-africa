@@ -5,8 +5,8 @@ import Link from 'next/link'
 import {
   ArrowRight, Zap, CheckCircle2, Star,
   Mic, Upload, ImageIcon, Camera, Send, Menu, X,
-  Brain, Rocket, Briefcase, DollarSign, Code, ShoppingBag,
-  Users, Sprout, Play, TrendingUp, Globe, Heart, Scale, Shield,
+  Brain, Rocket, Briefcase, DollarSign,
+  Users, Sprout, Globe, Heart, Shield,
   Home, Hammer,
 } from 'lucide-react'
 import { getEcosystemList } from '../lib/theme'
@@ -28,18 +28,6 @@ const ROTATING_PROMPTS = [
   'Teach me how to invest.',
 ]
 
-const OUTCOMES = [
-  { icon: Brain,       label: 'Learn AI',           prompt: 'Teach me AI from scratch' },
-  { icon: Rocket,      label: 'Start a Business',   prompt: 'Help me start a business' },
-  { icon: Briefcase,   label: 'Find a Job',         prompt: 'Help me find a job' },
-  { icon: DollarSign,  label: 'Access Funding',     prompt: 'Help me find funding for my idea' },
-  { icon: Code,        label: 'Build a Website',    prompt: 'Help me build a website' },
-  { icon: ShoppingBag, label: 'Sell Online',        prompt: 'Help me start selling online' },
-  { icon: Users,       label: 'Find Customers',     prompt: 'Help me find customers for my business' },
-  { icon: Sprout,      label: 'Improve Your Farm',  prompt: 'Help me improve my farm and increase yield' },
-  { icon: Play,        label: 'Create Content',     prompt: 'Help me create content to grow my brand' },
-  { icon: TrendingUp,  label: 'Grow Your Business', prompt: 'Help me grow my business' },
-]
 
 const ECO_ICONS = {
   connect:   Heart,
@@ -102,7 +90,7 @@ function Nav() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="font-bold text-xl tracking-tight" style={{ color: PINK }}>Ebbli</Link>
           <div className="hidden md:flex items-center gap-8">
-            {[['What Ebbli can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+            {[['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
               <a key={l} href={h} className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">{l}</a>
             ))}
           </div>
@@ -116,7 +104,7 @@ function Nav() {
         </div>
         {open && (
           <div className="md:hidden py-4 border-t border-slate-100 space-y-1">
-            {[['What Ebbli can do','#outcomes'],['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
+            {[['Products','#explore'],['Mission','#mission']].map(([l, h]) => (
               <a key={l} href={h} className="block text-sm font-medium text-slate-700 px-2 py-3 rounded-lg hover:bg-slate-50" onClick={() => setOpen(false)}>{l}</a>
             ))}
             <div className="flex flex-col gap-2 pt-3">
@@ -268,40 +256,6 @@ function Hero({ prompt, setPrompt }) {
 
 // ── Outcomes ───────────────────────────────────────────────────
 
-function Outcomes({ onSelect }) {
-  return (
-    <section id="outcomes" className="py-20 sm:py-28 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <Badge className="mb-4 text-white" style={{ background: PINK }}>What Ebbli can do</Badge>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
-            What can Ebbli <span style={{ color: PINK }}>help you do?</span>
-          </h2>
-          <p className="text-lg text-slate-600 max-w-xl mx-auto">
-            Choose a goal — Ebbli AI will guide you step by step.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {OUTCOMES.map(({ icon: Icon, label, prompt }) => (
-            <button key={label} type="button" onClick={() => onSelect(prompt)}
-              className="group flex flex-col items-center gap-3 bg-white border border-slate-100 rounded-2xl p-5 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-150"
-              style={{ ['--hover-border']: PINK }}
-              onMouseOver={e => e.currentTarget.style.borderColor = '#fda4af'}
-              onMouseOut={e => e.currentTarget.style.borderColor = ''}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
-                style={{ background: '#fce7ec', color: PINK }}>
-                <Icon className="w-6 h-6" />
-              </div>
-              <span className="text-sm font-semibold text-slate-800 leading-tight">{label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ── Explore Ebbli ─────────────────────────────────────────────
 
 function ExploreEbbli() {
@@ -446,20 +400,11 @@ function Footer() {
 export default function EbbliHomepage() {
   const [prompt, setPrompt] = useState('')
 
-  function selectOutcome(text) {
-    setPrompt(text)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    setTimeout(() => {
-      document.querySelector('textarea')?.focus()
-    }, 600)
-  }
-
   return (
     <>
       <Nav />
       <main>
         <Hero prompt={prompt} setPrompt={setPrompt} />
-        <Outcomes onSelect={selectOutcome} />
         <ExploreEbbli />
         <Mission />
       </main>

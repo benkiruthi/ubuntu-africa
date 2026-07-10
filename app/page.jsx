@@ -214,15 +214,13 @@ function Hero({ prompt, setPrompt }) {
             <Zap className="w-3 h-3" /> Africa's AI for Opportunity
           </Badge>
 
-          <p className="text-base font-medium text-slate-400 italic mb-3">Better Together</p>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-5">
-            Africa's AI<br />
-            <span style={{ color: PINK }}>for Opportunity</span>
+            Learn AI, Find Work,<br />
+            <span style={{ color: PINK }}>Build a Business & More.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-600 max-w-xl mx-auto mb-10 leading-relaxed">
-            Helping Africans learn, build, connect and earn through AI.
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Africa's AI platform for opportunity. Learn new skills, find a job, grow your business, find a partner, improve your farm, and more — all in one place. Free to start.
           </p>
 
           <div className="max-w-2xl mx-auto mb-8">

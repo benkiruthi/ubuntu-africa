@@ -4,9 +4,23 @@
 /* Custom breakpoint: xs = 400px (between default base and sm:640px) */
 @custom-variant xs (@media (width >= 400px));
 
+/* Font stacks */
+:root {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
 @layer utilities {
   .gradient-text {
-    background: linear-gradient(135deg, #15803d 0%, #4ade80 100%);
+    background: linear-gradient(135deg, #f04e6b 0%, #ff8fa3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

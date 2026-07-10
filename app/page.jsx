@@ -326,7 +326,7 @@ function ExploreEbbli() {
                   {(p.tagline.split(' — ')[1] ?? p.tagline)}
                 </p>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full mt-auto ${isLive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-                  {isLive ? '● Open now' : 'Waitlist'}
+                  {isLive ? '● Open now' : 'Coming Soon'}
                 </span>
               </a>
             )

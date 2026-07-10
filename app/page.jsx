@@ -231,11 +231,10 @@ function Hero({ prompt, setPrompt }) {
 
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-slate-500">
             <div className="flex items-center gap-2">
-              <div className="flex -space-x-1.5">
+              <div className="flex items-center gap-1">
                 {['ke','ng','gh','ug','tz'].map(cc => (
-                  <div key={cc} className="w-6 h-6 rounded-full border-2 border-white overflow-hidden flex-shrink-0">
-                    <img src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()} className="w-full h-full object-cover" />
-                  </div>
+                  <img key={cc} src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()}
+                    width={24} height={16} className="rounded-sm object-cover border border-slate-100" />
                 ))}
               </div>
               <span>Used across <strong className="text-slate-700">Africa</strong></span>

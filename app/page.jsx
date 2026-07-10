@@ -334,6 +334,45 @@ function Mission() {
   )
 }
 
+// ── Made for Africa ───────────────────────────────────────────
+
+const AFRICA_FLAGS = [
+  { cc:'ke', name:'Kenya' },
+  { cc:'ng', name:'Nigeria' },
+  { cc:'gh', name:'Ghana' },
+  { cc:'ug', name:'Uganda' },
+  { cc:'tz', name:'Tanzania' },
+  { cc:'za', name:'South Africa' },
+  { cc:'rw', name:'Rwanda' },
+  { cc:'et', name:'Ethiopia' },
+  { cc:'sn', name:'Senegal' },
+  { cc:'ci', name:'Ivory Coast' },
+  { cc:'cm', name:'Cameroon' },
+  { cc:'zw', name:'Zimbabwe' },
+  { cc:'zm', name:'Zambia' },
+  { cc:null, name:'Diaspora' },
+]
+
+function MadeForAfrica() {
+  return (
+    <section className="py-12 bg-white border-t border-slate-100 text-center">
+      <p className="text-xs font-bold tracking-[0.18em] uppercase text-slate-400 mb-5">Made for Africa</p>
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-4 max-w-2xl mx-auto mb-5">
+        {AFRICA_FLAGS.map(({ cc, name }) => (
+          <div key={name} className="flex flex-col items-center gap-1">
+            {cc
+              ? <img src={`https://flagcdn.com/w40/${cc}.png`} alt={name} width={40} height={27} className="rounded object-cover" />
+              : <span className="text-3xl leading-none">🌍</span>
+            }
+            <span className="text-[10px] font-semibold text-slate-400 tracking-wide">{name}</span>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-slate-400 italic">"I am because we are." · ebbli.co</p>
+    </section>
+  )
+}
+
 // ── Footer ─────────────────────────────────────────────────────
 
 function Footer() {
@@ -378,14 +417,8 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm">Made with ❤️ for Africa</p>
-          <div className="flex items-center gap-1.5">
-            {['ke','ng','gh','ug','tz','rw','za','et'].map(cc => (
-              <img key={cc} src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()}
-                width={20} height={14} className="rounded-sm object-cover opacity-60 hover:opacity-100 transition-opacity" />
-            ))}
-          </div>
+        <div className="border-t border-slate-800 pt-8 text-center">
+          <p className="text-sm">© {new Date().getFullYear()} Ebbli Technologies. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -404,6 +437,7 @@ export default function EbbliHomepage() {
         <Hero prompt={prompt} setPrompt={setPrompt} />
         <ExploreEbbli />
         <Mission />
+        <MadeForAfrica />
       </main>
       <Footer />
     </>

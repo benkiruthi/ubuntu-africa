@@ -15,6 +15,7 @@ const DESCRIPTION = "Ebbli is Africa's AI platform for opportunity. Learn new sk
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
+  icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

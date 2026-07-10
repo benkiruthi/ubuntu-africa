@@ -7,6 +7,7 @@ import {
   Mic, Upload, ImageIcon, Camera, Send, Menu, X, ChevronDown,
   Brain, Rocket, Briefcase, DollarSign, Code, ShoppingBag,
   Users, Sprout, Play, TrendingUp, Globe, Heart, Scale, Shield,
+  Home, Hammer,
 } from 'lucide-react'
 import { getEcosystemList } from '@/lib/theme'
 
@@ -41,16 +42,16 @@ const OUTCOMES = [
 ]
 
 const ECO_ICONS = {
-  learn:      Brain,
-  connect:    Heart,
-  jobs:       Briefcase,
-  business:   Rocket,
-  health:     Shield,
-  money:      DollarSign,
-  farmer:     Sprout,
-  leadership: TrendingUp,
-  care:       Users,
-  justice:    Scale,
+  connect:   Heart,
+  learn:     Brain,
+  jobs:      Briefcase,
+  business:  Rocket,
+  farmer:    Sprout,
+  money:     DollarSign,
+  health:    Shield,
+  community: Users,
+  family:    Home,
+  build:     Hammer,
 }
 
 // ── Shared components ──────────────────────────────────────────

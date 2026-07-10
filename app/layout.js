@@ -16,12 +16,15 @@ const inter = Inter({
   display: "swap",
 });
 
+const TITLE = "Ebbli — Learn AI, Find Work, Build a Business & More · Built for Africa"
+const DESCRIPTION = "Ebbli is Africa's AI platform for opportunity. Learn new skills, find a job, grow your business, find a partner, improve your farm, and more — all in one place. Free to start."
+
 export const metadata = {
-  title: "Ebbli",
-  description: BRAND.mission,
+  title: TITLE,
+  description: DESCRIPTION,
   openGraph: {
-    title: "Ebbli",
-    description: BRAND.mission,
+    title: TITLE,
+    description: DESCRIPTION,
     type: "website",
   },
 };

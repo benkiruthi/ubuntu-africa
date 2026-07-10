@@ -385,7 +385,7 @@ function Footer() {
           <p className="text-sm">Made with ❤️ for Africa</p>
           <div className="flex items-center gap-1.5">
             {['ke','ng','gh','ug','tz','rw','za','et'].map(cc => (
-              <img key={cc} src={`https://flagcdn.com/w20/${cc}.png`} alt={cc.toUpperCase()}
+              <img key={cc} src={`https://flagcdn.com/w40/${cc}.png`} alt={cc.toUpperCase()}
                 width={20} height={14} className="rounded-sm object-cover opacity-60 hover:opacity-100 transition-opacity" />
             ))}
           </div>
